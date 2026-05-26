@@ -5,8 +5,9 @@
 <script server>
 const path = require('path')
 const { findProduct, relatedProducts, priceLabel } = require(path.resolve(process.cwd(), 'resources/functions/catalog.ts'))
+const loc = (typeof locale !== 'undefined' && locale === 'de') ? 'de' : 'en'
 
-const product = (typeof slug !== 'undefined' && slug) ? findProduct(slug) : null
+const product = (typeof slug !== 'undefined' && slug) ? findProduct(slug, loc) : null
 
 const vm = product
   ? {
@@ -27,7 +28,7 @@ const vm = product
   : null
 
 const related = product
-  ? relatedProducts(product.slug, 4).map(p => ({
+  ? relatedProducts(product.slug, loc, 4).map(p => ({
       slug: p.slug,
       name: p.name,
       color: p.color,
@@ -44,18 +45,18 @@ const related = product
   @if (!vm)
     <div class="mx-auto max-w-2xl px-6 py-28 text-center">
       <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">404</p>
-      <h1 class="mt-3 font-display text-4xl text-stone-900">We couldn't find that piece</h1>
-      <p class="mt-3 text-stone-600">It may have sold out or moved. Browse the rest of the collection.</p>
-      <a href="/products" data-stx-link class="mt-8 inline-flex bg-stone-900 px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] hover:bg-stone-700">Shop all</a>
+      <h1 class="mt-3 font-display text-4xl text-stone-900">{t:product.not_found_title}</h1>
+      <p class="mt-3 text-stone-600">{t:product.not_found_copy}</p>
+      <a href="/products" data-stx-link class="mt-8 inline-flex bg-stone-900 px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] hover:bg-stone-700">{t:common.shop_all}</a>
     </div>
   @else
     <div class="mx-auto max-w-6xl px-6 py-10 md:py-14">
 
       <!-- Breadcrumb -->
       <nav class="mb-8 text-xs uppercase tracking-[0.14em] text-stone-500">
-        <a href="/" data-stx-link class="hover:text-stone-900">Home</a>
+        <a href="/" data-stx-link class="hover:text-stone-900">{t:product.home}</a>
         <span class="px-2">/</span>
-        <a href="/products" data-stx-link class="hover:text-stone-900">Shop</a>
+        <a href="/products" data-stx-link class="hover:text-stone-900">{t:product.shop}</a>
         <span class="px-2">/</span>
         <span class="text-stone-700">{{ vm.name }}</span>
       </nav>
@@ -84,8 +85,8 @@ const related = product
           <!-- Size selector -->
           <div class="mt-8" data-stx-size-group>
             <div class="flex items-center justify-between">
-              <span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-900">Size</span>
-              <a href="#size-guide" class="text-[11px] uppercase tracking-[0.14em] text-stone-500 underline underline-offset-2 hover:text-stone-900">Size guide</a>
+              <span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-900">{t:product.size}</span>
+              <a href="#size-guide" class="text-[11px] uppercase tracking-[0.14em] text-stone-500 underline underline-offset-2 hover:text-stone-900">{t:product.size_guide}</a>
             </div>
             <div class="mt-3 flex flex-wrap gap-2.5">
               @foreach (vm.sizes as size, i)
@@ -106,22 +107,22 @@ const related = product
               type="button"
               data-stx-add-to-bag
               class="flex-1 bg-stone-900 px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] transition-colors hover:bg-stone-700"
-            >Add to bag — {{ vm.priceLabel }}</button>
+            >{t:common.add_to_bag} — {{ vm.priceLabel }}</button>
           </div>
-          <p data-stx-added class="mt-3 hidden text-sm text-emerald-700">Added to your bag ✓ <a href="/cart" data-stx-link class="underline underline-offset-2">View bag</a></p>
+          <p data-stx-added class="mt-3 hidden text-sm text-emerald-700">{t:product.added} <a href="/cart" data-stx-link class="underline underline-offset-2">{t:product.view_bag}</a></p>
 
           <!-- Accordions -->
           <div class="mt-10 divide-y divide-stone-900/10 border-y border-stone-900/10">
             <details class="group py-4" open>
               <summary class="flex cursor-pointer list-none items-center justify-between text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-900">
-                Description
+                {t:product.description}
                 <span class="text-stone-400 transition-transform group-open:rotate-45">+</span>
               </summary>
               <p class="mt-3 leading-relaxed text-stone-600">{{ vm.description }}</p>
             </details>
             <details class="group py-4">
               <summary class="flex cursor-pointer list-none items-center justify-between text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-900">
-                Details &amp; care
+                {t:product.details}
                 <span class="text-stone-400 transition-transform group-open:rotate-45">+</span>
               </summary>
               <ul class="mt-3 space-y-2 text-sm text-stone-600">
@@ -132,10 +133,10 @@ const related = product
             </details>
             <details class="group py-4">
               <summary class="flex cursor-pointer list-none items-center justify-between text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-900">
-                Shipping &amp; returns
+                {t:product.shipping_returns}
                 <span class="text-stone-400 transition-transform group-open:rotate-45">+</span>
               </summary>
-              <p class="mt-3 leading-relaxed text-stone-600">Free U.S. shipping over $75, shipped within two business days. 30-day returns on unworn items — see our <a href="/policies/returns" data-stx-link class="underline underline-offset-2">returns policy</a>.</p>
+              <p class="mt-3 leading-relaxed text-stone-600">{t:product.shipping_returns_copy}</p>
             </details>
           </div>
         </div>
@@ -144,7 +145,7 @@ const related = product
       <!-- Related -->
       @if (related.length > 0)
         <section class="mt-24">
-          <h2 class="mb-10 text-center font-display text-3xl text-stone-900 md:text-4xl">You might also like</h2>
+          <h2 class="mb-10 text-center font-display text-3xl text-stone-900 md:text-4xl">{t:product.related}</h2>
           <div class="grid grid-cols-2 gap-x-5 gap-y-10 lg:grid-cols-4">
             @foreach (related as r)
               <ProductTile

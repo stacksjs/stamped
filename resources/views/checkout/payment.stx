@@ -5,7 +5,8 @@
 <script server>
 const path = require('path')
 const { getProducts, priceLabel } = require(path.resolve(process.cwd(), 'resources/functions/catalog.ts'))
-const all = getProducts()
+const loc = (typeof locale !== 'undefined' && locale === 'de') ? 'de' : 'en'
+const all = getProducts(loc)
 const sample = [{ slug: 'ny-tee', qty: 1 }, { slug: 'ny-hoodie', qty: 1 }]
 const items = sample.map((s) => {
   const p = all.find(x => x.slug === s.slug)
@@ -13,51 +14,56 @@ const items = sample.map((s) => {
   return { name: `${p.name} — ${p.color}`, qty: s.qty, lineTotal, lineTotalLabel: priceLabel(lineTotal) }
 })
 const subtotal = items.reduce((s, i) => s + i.lineTotal, 0)
-const shipping = subtotal >= 75 ? 0 : 6
+const shipping = subtotal >= 85 ? 0 : 6
 const total = subtotal + shipping
 const subtotalLabel = priceLabel(subtotal)
-const shippingLabel = shipping === 0 ? 'Free' : priceLabel(shipping)
+const shippingLabel = shipping === 0 ? '{t:summary.free}' : priceLabel(shipping)
 const totalLabel = priceLabel(total)
+const steps = [
+  { key: 'contact', label: '{t:checkout.step_contact}', href: '/checkout/contact' },
+  { key: 'shipping', label: '{t:checkout.step_shipping}', href: '/checkout/shipping' },
+  { key: 'payment', label: '{t:checkout.step_payment}', href: '/checkout/payment' },
+]
 </script>
 
 @section('content')
   <div class="mx-auto max-w-5xl px-6 py-12 md:py-16">
-    <CheckoutSteps current="payment" />
+    <CheckoutSteps current="payment" :steps="steps" />
 
     <div class="grid items-start gap-10 md:grid-cols-[1fr_360px]">
       <div>
-        <h1 class="font-display text-4xl text-stone-900">Payment</h1>
-        <p class="mt-2 text-stone-600">All transactions are secure and encrypted.</p>
+        <h1 class="font-display text-4xl text-stone-900">{t:checkout.payment_title}</h1>
+        <p class="mt-2 text-stone-600">{t:checkout.payment_copy}</p>
 
         <form action="/checkout/complete" method="get" class="mt-8 space-y-5">
           <div>
-            <label class="text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-500">Card number</label>
+            <label class="text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-500">{t:checkout.card_number}</label>
             <input name="card" inputmode="numeric" placeholder="1234 1234 1234 1234" required class="mt-1.5 w-full border border-stone-900/20 bg-transparent px-4 py-3 text-sm focus:border-stone-900 focus:outline-none">
           </div>
           <div class="grid gap-5 sm:grid-cols-2">
             <div>
-              <label class="text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-500">Expiration</label>
+              <label class="text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-500">{t:checkout.expiration}</label>
               <input name="exp" placeholder="MM / YY" required class="mt-1.5 w-full border border-stone-900/20 bg-transparent px-4 py-3 text-sm focus:border-stone-900 focus:outline-none">
             </div>
             <div>
-              <label class="text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-500">CVC</label>
+              <label class="text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-500">{t:checkout.cvc}</label>
               <input name="cvc" inputmode="numeric" placeholder="123" required class="mt-1.5 w-full border border-stone-900/20 bg-transparent px-4 py-3 text-sm focus:border-stone-900 focus:outline-none">
             </div>
           </div>
           <div>
-            <label class="text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-500">Name on card</label>
+            <label class="text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-500">{t:checkout.name_on_card}</label>
             <input name="cardname" required class="mt-1.5 w-full border border-stone-900/20 bg-transparent px-4 py-3 text-sm focus:border-stone-900 focus:outline-none">
           </div>
 
           <div class="flex items-center justify-between gap-4 pt-2">
-            <a href="/checkout/shipping" data-stx-link class="text-sm text-stone-500 hover:text-stone-900">← Back to shipping</a>
-            <button type="submit" class="bg-stone-900 px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] transition-colors hover:bg-stone-700">Pay {{ totalLabel }}</button>
+            <a href="/checkout/shipping" data-stx-link class="text-sm text-stone-500 hover:text-stone-900">← {t:checkout.back_to_shipping}</a>
+            <button type="submit" class="bg-stone-900 px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] transition-colors hover:bg-stone-700">{t:checkout.pay} {{ totalLabel }}</button>
           </div>
-          <p class="pt-1 text-center text-xs text-stone-400">Demo checkout — no card is charged.</p>
+          <p class="pt-1 text-center text-xs text-stone-400">{t:checkout.demo_note}</p>
         </form>
       </div>
 
-      <OrderSummary
+      <BagSummary
         :items="items"
         subtotalLabel="{{ subtotalLabel }}"
         shippingLabel="{{ shippingLabel }}"

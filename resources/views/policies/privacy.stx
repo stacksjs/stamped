@@ -4,26 +4,26 @@
 
 @section('content')
   <article class="mx-auto max-w-2xl px-6 py-16">
-    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">Policies</p>
-    <h1 class="mt-3 font-display text-5xl text-stone-900">Privacy</h1>
-    <p class="mt-4 text-sm text-stone-500">Sample policy copy for this demo storefront.</p>
+    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">{t:policies.label}</p>
+    <h1 class="mt-3 font-display text-5xl text-stone-900">{t:policies.privacy_title}</h1>
+    <p class="mt-4 text-sm text-stone-500">{t:policies.sample_note}</p>
 
     <div class="mt-10 space-y-8 leading-relaxed text-stone-600">
       <section>
-        <h2 class="font-display text-2xl text-stone-900">What we collect</h2>
-        <p class="mt-2">We collect the details you give us to fulfill an order — name, shipping address, email, and payment confirmation — plus basic, privacy-friendly analytics about how the site is used.</p>
+        <h2 class="font-display text-2xl text-stone-900">{t:policies.privacy_h1}</h2>
+        <p class="mt-2">{t:policies.privacy_p1}</p>
       </section>
       <section>
-        <h2 class="font-display text-2xl text-stone-900">How we use it</h2>
-        <p class="mt-2">Your information is used to process orders, provide support, and — only if you opt in — send occasional updates about new releases. We never sell your data.</p>
+        <h2 class="font-display text-2xl text-stone-900">{t:policies.privacy_h2}</h2>
+        <p class="mt-2">{t:policies.privacy_p2}</p>
       </section>
       <section>
-        <h2 class="font-display text-2xl text-stone-900">Payments</h2>
-        <p class="mt-2">Card details are handled by our payment processor and are never stored on our servers.</p>
+        <h2 class="font-display text-2xl text-stone-900">{t:policies.privacy_h3}</h2>
+        <p class="mt-2">{t:policies.privacy_p3}</p>
       </section>
       <section>
-        <h2 class="font-display text-2xl text-stone-900">Your choices</h2>
-        <p class="mt-2">You can unsubscribe from email at any time, and you may request a copy or deletion of your data by contacting us through <a href="/contact" data-stx-link class="underline underline-offset-2 hover:text-stone-900">our contact page</a>.</p>
+        <h2 class="font-display text-2xl text-stone-900">{t:policies.privacy_h4}</h2>
+        <p class="mt-2">{t:policies.privacy_p4_prefix} <a href="/contact" data-stx-link class="underline underline-offset-2 hover:text-stone-900">{t:policies.privacy_p4_link}</a>.</p>
       </section>
     </div>
   </article>

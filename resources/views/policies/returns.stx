@@ -4,26 +4,26 @@
 
 @section('content')
   <article class="mx-auto max-w-2xl px-6 py-16">
-    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">Policies</p>
-    <h1 class="mt-3 font-display text-5xl text-stone-900">Returns &amp; exchanges</h1>
-    <p class="mt-4 text-sm text-stone-500">Sample policy copy for this demo storefront.</p>
+    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">{t:policies.label}</p>
+    <h1 class="mt-3 font-display text-5xl text-stone-900">{t:policies.returns_title}</h1>
+    <p class="mt-4 text-sm text-stone-500">{t:policies.sample_note}</p>
 
     <div class="mt-10 space-y-8 leading-relaxed text-stone-600">
       <section>
-        <h2 class="font-display text-2xl text-stone-900">30-day window</h2>
-        <p class="mt-2">Unworn, unwashed items with tags attached can be returned within 30 days of delivery for a refund to the original payment method, or exchanged for a different size.</p>
+        <h2 class="font-display text-2xl text-stone-900">{t:policies.returns_h1}</h2>
+        <p class="mt-2">{t:policies.returns_p1}</p>
       </section>
       <section>
-        <h2 class="font-display text-2xl text-stone-900">How to start a return</h2>
-        <p class="mt-2">Sign in to your account and open the order, or email us with your order number. We'll send a prepaid label for U.S. returns; international return shipping is the customer's responsibility.</p>
+        <h2 class="font-display text-2xl text-stone-900">{t:policies.returns_h2}</h2>
+        <p class="mt-2">{t:policies.returns_p2}</p>
       </section>
       <section>
-        <h2 class="font-display text-2xl text-stone-900">Refunds</h2>
-        <p class="mt-2">Once your return is received and inspected, refunds are issued within 3–5 business days. It can take a few extra days for your bank to post the credit.</p>
+        <h2 class="font-display text-2xl text-stone-900">{t:policies.returns_h3}</h2>
+        <p class="mt-2">{t:policies.returns_p3}</p>
       </section>
       <section>
-        <h2 class="font-display text-2xl text-stone-900">Final sale</h2>
-        <p class="mt-2">Limited-edition and clearly marked final-sale pieces can't be returned or exchanged. The product page will always say so before you buy.</p>
+        <h2 class="font-display text-2xl text-stone-900">{t:policies.returns_h4}</h2>
+        <p class="mt-2">{t:policies.returns_p4}</p>
       </section>
     </div>
   </article>

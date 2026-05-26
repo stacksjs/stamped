@@ -9,36 +9,32 @@
       <img src="/assets/images/stamped/gallery-waterfront.jpg" alt="" class="absolute inset-0 h-full w-full object-cover" fetchpriority="high">
       <div class="absolute inset-0 bg-black/35"></div>
       <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-[#f7f1e3]">
-        <p class="text-[11px] font-semibold uppercase tracking-[0.28em]">Est. New York</p>
-        <h1 class="mt-3 font-display text-6xl md:text-7xl">Our story</h1>
+        <p class="text-[11px] font-semibold uppercase tracking-[0.28em]">{t:about.eyebrow}</p>
+        <h1 class="mt-3 font-display text-6xl md:text-7xl">{t:about.title}</h1>
       </div>
     </div>
   </section>
 
   <section class="mx-auto max-w-2xl px-6 py-20 text-center">
-    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">The studio</p>
-    <h2 class="mt-3 font-display text-4xl leading-tight text-stone-900">Heavyweight pieces, made in small batches in the city we love.</h2>
-    <p class="mt-6 leading-relaxed text-stone-600">
-      Stamped started with a single tee and a simple idea: make the kind of New York staple you actually want to keep — heavyweight, honest, and built to age well. No fast fashion, no endless drops. Just a tight collection of pieces we wear ourselves.
-    </p>
-    <p class="mt-4 leading-relaxed text-stone-600">
-      Everything is designed in our studio and screen-printed by hand in limited runs. We garment-dye for that lived-in feel, double-stitch the seams that matter, and keep the prints soft so they never crack. When a run sells out, it's gone — and we move on to the next.
-    </p>
+    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">{t:about.studio_eyebrow}</p>
+    <h2 class="mt-3 font-display text-4xl leading-tight text-stone-900">{t:about.studio_title}</h2>
+    <p class="mt-6 leading-relaxed text-stone-600">{t:about.studio_p1}</p>
+    <p class="mt-4 leading-relaxed text-stone-600">{t:about.studio_p2}</p>
   </section>
 
   <section class="border-y border-stone-900/10 bg-[#efe7d4]">
     <div class="mx-auto grid max-w-5xl gap-12 px-6 py-16 md:grid-cols-3">
       <div>
-        <p class="font-display text-3xl text-stone-900">Made here</p>
-        <p class="mt-2 text-sm leading-relaxed text-stone-600">Designed and printed in New York, in runs small enough to check every piece by hand.</p>
+        <p class="font-display text-3xl text-stone-900">{t:about.pillar1_title}</p>
+        <p class="mt-2 text-sm leading-relaxed text-stone-600">{t:about.pillar1_copy}</p>
       </div>
       <div>
-        <p class="font-display text-3xl text-stone-900">Built to last</p>
-        <p class="mt-2 text-sm leading-relaxed text-stone-600">Heavyweight, garment-dyed cotton that softens with wear instead of falling apart.</p>
+        <p class="font-display text-3xl text-stone-900">{t:about.pillar2_title}</p>
+        <p class="mt-2 text-sm leading-relaxed text-stone-600">{t:about.pillar2_copy}</p>
       </div>
       <div>
-        <p class="font-display text-3xl text-stone-900">Kept honest</p>
-        <p class="mt-2 text-sm leading-relaxed text-stone-600">Fair prices, no markdowns games, and a tight collection we genuinely stand behind.</p>
+        <p class="font-display text-3xl text-stone-900">{t:about.pillar3_title}</p>
+        <p class="mt-2 text-sm leading-relaxed text-stone-600">{t:about.pillar3_copy}</p>
       </div>
     </div>
   </section>
@@ -48,9 +44,9 @@
       <img src="/assets/images/stamped/lifestyle-dumbo.jpg" alt="Wearing the hoodie under the Manhattan Bridge" loading="lazy" class="h-full w-full object-cover">
     </div>
     <div class="max-w-md">
-      <h2 class="font-display text-4xl text-stone-900">From the city, for the city</h2>
-      <p class="mt-5 leading-relaxed text-stone-600">Our pieces are photographed where we wear them — the waterfront, the park, the upper deck, the late train home. That's the whole point: clothes for the everyday city, not the runway.</p>
-      <a href="/lookbook" data-stx-link class="mt-8 inline-flex border border-stone-900 px-9 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-900 transition-colors hover:bg-stone-900 hover:text-[#f7f1e3]">See the lookbook</a>
+      <h2 class="font-display text-4xl text-stone-900">{t:about.city_title}</h2>
+      <p class="mt-5 leading-relaxed text-stone-600">{t:about.city_copy}</p>
+      <a href="/lookbook" data-stx-link class="mt-8 inline-flex border border-stone-900 px-9 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-900 transition-colors hover:bg-stone-900 hover:text-[#f7f1e3]">{t:about.city_cta}</a>
     </div>
   </section>
 @endsection

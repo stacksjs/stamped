@@ -1,0 +1,72 @@
+<script>
+interface BagItem {
+  name: string
+  qty: number
+  lineTotalLabel: string
+}
+
+interface BagSummaryProps {
+  items?: BagItem[]
+  /** Pre-formatted price labels — format at the call site. */
+  subtotalLabel: string
+  shippingLabel: string
+  totalLabel: string
+  /** Pre-formatted remaining amount (e.g. "$23.00"); shows the free-shipping
+   *  nudge when non-empty. */
+  freeRemainingLabel?: string
+  showItems?: boolean
+  ctaHref?: string
+  secondaryHref?: string
+  sticky?: boolean
+}
+
+const {
+  items = [],
+  subtotalLabel,
+  shippingLabel,
+  totalLabel,
+  freeRemainingLabel = '',
+  showItems = false,
+  ctaHref = '',
+  secondaryHref = '',
+  sticky = false,
+} = defineProps<BagSummaryProps>()
+</script>
+
+<aside class="rounded-2xl border border-stone-200 p-6 {{ sticky ? 'lg:sticky lg:top-28' : '' }}">
+  <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-500">{t:summary.title}</p>
+
+  @if (showItems && items.length > 0)
+    <ul class="mt-4 space-y-2 text-sm">
+      @foreach (items as item)
+        <li class="flex justify-between gap-3">
+          <span class="text-stone-700">{{ item.qty }}× {{ item.name }}</span>
+          <span class="font-medium text-stone-900">{{ item.lineTotalLabel }}</span>
+        </li>
+      @endforeach
+    </ul>
+    <hr class="my-4 border-stone-200">
+  @endif
+
+  <dl class="space-y-3 text-sm {{ showItems ? '' : 'mt-4' }}">
+    <div class="flex justify-between"><dt class="text-stone-600">{t:summary.subtotal}</dt><dd class="font-semibold text-stone-900">{{ subtotalLabel }}</dd></div>
+    <div class="flex justify-between"><dt class="text-stone-600">{t:summary.shipping}</dt><dd class="font-semibold text-stone-900">{{ shippingLabel }}</dd></div>
+    @if (freeRemainingLabel)
+      <p class="rounded-lg bg-emerald-50 px-3 py-2 text-xs text-emerald-700">{t:summary.free_shipping_prefix} {{ freeRemainingLabel }} {t:summary.free_shipping_suffix}</p>
+    @endif
+  </dl>
+
+  <hr class="my-4 border-stone-200">
+
+  <div class="flex justify-between text-base">
+    <p class="font-semibold text-stone-900">{t:summary.total}</p>
+    <p class="font-bold text-stone-900">{{ totalLabel }}</p>
+  </div>
+
+  @if (ctaHref)
+    <a href="{{ ctaHref }}" data-stx-link class="mt-6 block w-full rounded-full bg-stone-900 px-6 py-3 text-center text-sm font-semibold text-[#f7f1e3] transition-colors hover:bg-stone-700">{t:summary.checkout}</a>
+  @endif
+  @if (secondaryHref)
+    <a href="{{ secondaryHref }}" data-stx-link class="mt-3 block w-full rounded-full border border-stone-300 px-6 py-3 text-center text-sm font-semibold text-stone-900 transition-colors hover:border-stone-900">{t:common.keep_shopping}</a>
+  @endif
+</aside>

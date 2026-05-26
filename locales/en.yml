@@ -1,15 +1,285 @@
-default:
-  button:
-    about: About
-    back: Back
-    go: GO
-    home: Home
-    toggle_dark: Toggle dark mode
-    toggle_langs: Change languages
-  intro:
-    desc: Rapid Application Development
-    dynamic_route: Demo of dynamic route
-    hi: 'Hi, {name}!'
-    aka: Also known as
-    whats_your_name: What’s your name?
-    not_found: Not found
+# English (default locale). Nested keys are flattened to dotted keys
+# (e.g. nav.shop) and referenced from templates as {t:nav.shop}.
+announce:
+  message: Complimentary shipping on U.S. orders over $85 · Made in small batches in New York
+
+coming:
+  eyebrow: Launching soon
+  title: Coming soon
+  copy: We're putting the finishing touches on the new Stamped. Leave your email and we'll let you know the moment the doors open.
+  notify: Notify me
+  thanks: Thanks — we'll be in touch.
+
+nav:
+  shop: Shop
+  collections: Collections
+  lookbook: Lookbook
+  about: About
+  search: Search
+  account: Account
+  cart: Cart
+  menu: Menu
+
+common:
+  shop_all: Shop all
+  shop_now: Shop now
+  view_all: View all
+  view: View
+  add_to_bag: Add to bag
+  keep_shopping: Keep shopping
+  subscribe: Subscribe
+  join: Join
+  email_address: Email address
+  pieces: pieces
+  piece: piece
+
+home:
+  hero_title: New arrivals
+  featured_eyebrow: Signature
+  collection_title: Shop the collection
+  gallery_title: I ❤ New York
+  newsletter_title: Join the list
+  newsletter_copy: Early access to new drops, restocks, and the occasional letter from the city. No spam.
+  vp_shipping_title: Free U.S. shipping
+  vp_shipping_copy: On every order over $85, shipped within two business days.
+  vp_cotton_title: Heavyweight cotton
+  vp_cotton_copy: Garment-dyed, pre-shrunk, and built to outlast the season.
+  vp_made_title: Made in New York
+  vp_made_copy: Designed and screen-printed in small batches in the city.
+
+shop:
+  eyebrow: The collection
+  title: Shop all
+  subtitle: designed and printed in New York
+  filter_all: All
+
+collections:
+  eyebrow: Browse by category
+  title: Collections
+  shop_cta: Shop
+
+product:
+  home: Home
+  shop: Shop
+  size: Size
+  size_guide: Size guide
+  description: Description
+  details: Details & care
+  shipping_returns: Shipping & returns
+  shipping_returns_copy: Free U.S. shipping over $85, shipped within two business days. 30-day returns on unworn items.
+  added: Added to your bag ✓
+  view_bag: View bag
+  related: You might also like
+  not_found_title: We couldn't find that piece
+  not_found_copy: It may have sold out or moved. Browse the rest of the collection.
+
+filters:
+  category_tees: Tees
+  category_hoodies: Hoodies
+  category_crewnecks: Crewnecks
+
+cart:
+  eyebrow: Your bag
+  title: Shopping bag
+  ready_one: item ready to ship.
+  ready_many: items ready to ship.
+  empty: Your bag is empty.
+  remove: Remove
+  size_label: Size
+
+summary:
+  title: Order summary
+  subtotal: Subtotal
+  shipping: Shipping
+  total: Total
+  free: Free
+  checkout: Checkout
+  free_shipping_prefix: Add
+  free_shipping_suffix: more for free shipping.
+
+checkout:
+  step_contact: Contact
+  step_shipping: Shipping
+  step_payment: Payment
+  contact_title: Contact
+  contact_copy: We'll send your receipt and tracking here.
+  email_offers: Email me with news and offers
+  back_to_bag: Back to bag
+  continue_to_shipping: Continue to shipping
+  shipping_title: Shipping address
+  shipping_copy: Where should we send your order?
+  first_name: First name
+  last_name: Last name
+  address: Address
+  city: City
+  state: State
+  zip: ZIP
+  delivery_method: Delivery method
+  delivery_standard: Standard · 3–5 business days
+  delivery_express: Express · 1–2 business days
+  back_to_contact: Back to contact
+  continue_to_payment: Continue to payment
+  payment_title: Payment
+  payment_copy: All transactions are secure and encrypted.
+  card_number: Card number
+  expiration: Expiration
+  cvc: CVC
+  name_on_card: Name on card
+  back_to_shipping: Back to shipping
+  pay: Pay
+  demo_note: Demo checkout — no card is charged.
+  thank_you: Thank you
+  order: Order
+  confirmed_copy: Your order is confirmed. A receipt is on its way to your inbox, and we'll email tracking once it ships.
+  continue_shopping: Continue shopping
+  qty: Qty
+
+lookbook:
+  season: Fall / Winter
+  title: The Lookbook
+  hero_copy: Worn across the five boroughs — from the waterfront to the upper deck.
+  outro_title: Wear the city
+  outro_copy: Every piece is designed and printed in small batches in New York.
+  cta: Shop the collection
+
+about:
+  eyebrow: Est. New York
+  title: Our story
+  studio_eyebrow: The studio
+  studio_title: Heavyweight pieces, made in small batches in the city we love.
+  studio_p1: Stamped started with a single tee and a simple idea — make the kind of New York staple you actually want to keep — heavyweight, honest, and built to age well. No fast fashion, no endless drops. Just a tight collection of pieces we wear ourselves.
+  studio_p2: Everything is designed in our studio and screen-printed by hand in limited runs. We garment-dye for that lived-in feel, double-stitch the seams that matter, and keep the prints soft so they never crack. When a run sells out, it's gone — and we move on to the next.
+  pillar1_title: Made here
+  pillar1_copy: Designed and printed in New York, in runs small enough to check every piece by hand.
+  pillar2_title: Built to last
+  pillar2_copy: Heavyweight, garment-dyed cotton that softens with wear instead of falling apart.
+  pillar3_title: Kept honest
+  pillar3_copy: Fair prices, no markdown games, and a tight collection we genuinely stand behind.
+  city_title: From the city, for the city
+  city_copy: Our pieces are photographed where we wear them — the waterfront, the park, the upper deck, the late train home. That's the whole point — clothes for the everyday city, not the runway.
+  city_cta: See the lookbook
+
+contact:
+  eyebrow: We're here to help
+  title: Get in touch
+  copy: Questions about sizing, an order, or a wholesale enquiry? Drop us a line — we usually reply within a day.
+  name: Name
+  email: Email
+  subject: Subject
+  message: Message
+  send: Send message
+  email_label: Email
+  studio_label: Studio
+  studio_value: Brooklyn, New York
+  studio_hint: By appointment only
+  hours_label: Hours
+  hours_value: Mon–Fri · 9am–6pm ET
+  follow_label: Follow
+
+faq:
+  eyebrow: Good to know
+  title: FAQ
+  q1: How do your pieces fit?
+  a1: Our tees are cut boxy and relaxed — if you prefer a classic fit, size down one. Hoodies are oversized with dropped shoulders. Each product page lists the exact fit and fabric weight.
+  q2: When will my order ship?
+  a2: In-stock orders ship within two business days from New York. You'll get a tracking link by email as soon as it's on its way.
+  q3: Do you ship internationally?
+  a3: Yes. International shipping is calculated at checkout. Duties and taxes may be collected by your local carrier on delivery.
+  q4: What's your return policy?
+  a4: Unworn, unwashed items can be returned within 30 days for a refund or exchange. Start a return from your account or by emailing us.
+  q5: How should I care for my pieces?
+  a5: Machine wash cold inside-out, hang or tumble dry low. Skip the iron on the print. Our heavyweight cotton is pre-shrunk, so it holds its shape.
+  q6: Will sold-out pieces come back?
+  a6: Sometimes. We make in small batches, so popular pieces restock occasionally — join the list to hear first.
+  cta_title: Still have a question?
+  cta_copy: We're happy to help with sizing, orders, and anything else.
+  cta_button: Contact us
+
+search:
+  title: Search
+  placeholder: Search tees, hoodies, colors…
+  results: results
+  empty_prefix: No pieces match that search. Try another term, or
+  empty_link: browse everything
+
+account:
+  signin_title: Sign in
+  signin_copy: Welcome back. Sign in to track orders and check out faster.
+  password: Password
+  forgot: Forgot?
+  signin_button: Sign in
+  signin_switch: New here?
+  signin_switch_link: Create an account
+  register_title: Create account
+  register_copy: Save your details, track orders, and get early access to new drops.
+  register_offers: Email me about new drops and restocks.
+  register_button: Create account
+  register_switch: Already have an account?
+  register_switch_link: Sign in
+
+footer:
+  tagline: Heavyweight, vintage-inspired New York apparel — designed and printed in small batches in the city it's named for.
+  col_shop: Shop
+  col_help: Help
+  col_company: Company
+  link_all_products: All products
+  link_tees: Tees
+  link_hoodies: Hoodies
+  link_lookbook: Lookbook
+  link_contact: Contact
+  link_faq: FAQ
+  link_shipping: Shipping
+  link_returns: Returns
+  link_about: Our story
+  link_terms: Terms
+  link_privacy: Privacy
+  rights: All rights reserved.
+  terms_policies: Terms & Policies
+  instagram: Instagram
+  language: Language
+
+policies:
+  label: Policies
+  sample_note: Sample policy copy for this demo storefront.
+  shipping_title: Shipping
+  shipping_h1: Processing
+  shipping_p1: In-stock orders are packed and shipped from New York within two business days. You'll receive a confirmation email with tracking as soon as your order is on its way.
+  shipping_h2: Domestic (U.S.)
+  shipping_p2: Standard shipping is a flat $6, and free on orders over $85 — typically 3–5 business days. Express delivery (1–2 business days) is available at checkout.
+  shipping_h3: International
+  shipping_p3: We ship worldwide. Rates are calculated at checkout based on destination and weight. Any duties or import taxes are the responsibility of the recipient and may be collected on delivery.
+  shipping_h4: Lost or delayed packages
+  shipping_p4_prefix: If your tracking hasn't updated in several days, reach out via
+  shipping_p4_link: our contact page
+  shipping_p4_suffix: and we'll chase it down with the carrier.
+  returns_title: Returns & exchanges
+  returns_h1: 30-day window
+  returns_p1: Unworn, unwashed items with tags attached can be returned within 30 days of delivery for a refund to the original payment method, or exchanged for a different size.
+  returns_h2: How to start a return
+  returns_p2: Sign in to your account and open the order, or email us with your order number. We'll send a prepaid label for U.S. returns; international return shipping is the customer's responsibility.
+  returns_h3: Refunds
+  returns_p3: Once your return is received and inspected, refunds are issued within 3–5 business days. It can take a few extra days for your bank to post the credit.
+  returns_h4: Final sale
+  returns_p4: Limited-edition and clearly marked final-sale pieces can't be returned or exchanged. The product page will always say so before you buy.
+  terms_title: Terms & conditions
+  terms_h1: Overview
+  terms_p1: By using this site and placing an order, you agree to these terms. We may update them from time to time; the version posted here is the one that applies to your order.
+  terms_h2: Orders & pricing
+  terms_p2: All prices are listed in U.S. dollars. We reserve the right to correct pricing errors and to limit quantities. An order is confirmed once you receive a confirmation email.
+  terms_h3: Products
+  terms_p3: Because our pieces are garment-dyed and printed in small batches, slight variation between items is normal and part of the character — it is not a defect.
+  terms_h4: Intellectual property
+  terms_p4: All artwork, designs, and content on this site belong to Stamped and may not be reproduced without permission.
+  terms_h5: Contact
+  terms_p5_prefix: Questions about these terms? Reach us through
+  terms_p5_link: our contact page
+  privacy_title: Privacy
+  privacy_h1: What we collect
+  privacy_p1: We collect the details you give us to fulfill an order — name, shipping address, email, and payment confirmation — plus basic, privacy-friendly analytics about how the site is used.
+  privacy_h2: How we use it
+  privacy_p2: Your information is used to process orders, provide support, and — only if you opt in — send occasional updates about new releases. We never sell your data.
+  privacy_h3: Payments
+  privacy_p3: Card details are handled by our payment processor and are never stored on our servers.
+  privacy_h4: Your choices
+  privacy_p4_prefix: You can unsubscribe from email at any time, and you may request a copy or deletion of your data by contacting us through
+  privacy_p4_link: our contact page

@@ -4,17 +4,19 @@
 @section('description', 'The Stamped lookbook — our heavyweight I ❤ New York pieces, worn across the five boroughs.')
 
 <script server>
+const loc = (typeof locale !== 'undefined' && locale === 'de') ? 'de' : 'en'
 const IMG = '/assets/images/stamped'
-const shots = [
-  { src: `${IMG}/gallery-waterfront.jpg`, alt: 'Brooklyn waterfront', span: 'lg:row-span-2' },
-  { src: `${IMG}/gallery-street.jpg`, alt: 'Midtown sidewalk', span: '' },
-  { src: `${IMG}/gallery-stadium.jpg`, alt: 'Game day in the stands', span: '' },
-  { src: `${IMG}/lifestyle-dumbo.jpg`, alt: 'Under the Manhattan Bridge', span: 'lg:row-span-2' },
-  { src: `${IMG}/gallery-park.jpg`, alt: 'An afternoon in the park', span: '' },
-  { src: `${IMG}/gallery-night.jpg`, alt: 'Chinatown after dark', span: '' },
-  { src: `${IMG}/lifestyle-sidewalk.jpg`, alt: 'Walking the block', span: '' },
-  { src: `${IMG}/lifestyle-stadium-hood.jpg`, alt: 'Hood up at the game', span: '' },
+const data = [
+  { src: `${IMG}/gallery-waterfront.jpg`, en: 'Brooklyn waterfront', de: 'Brooklyner Waterfront', span: 'lg:row-span-2' },
+  { src: `${IMG}/gallery-street.jpg`, en: 'Midtown sidewalk', de: 'Bürgersteig in Midtown', span: '' },
+  { src: `${IMG}/gallery-stadium.jpg`, en: 'Game day in the stands', de: 'Spieltag auf der Tribüne', span: '' },
+  { src: `${IMG}/lifestyle-dumbo.jpg`, en: 'Under the Manhattan Bridge', de: 'Unter der Manhattan Bridge', span: 'lg:row-span-2' },
+  { src: `${IMG}/gallery-park.jpg`, en: 'An afternoon in the park', de: 'Ein Nachmittag im Park', span: '' },
+  { src: `${IMG}/gallery-night.jpg`, en: 'Chinatown after dark', de: 'Chinatown bei Nacht', span: '' },
+  { src: `${IMG}/lifestyle-sidewalk.jpg`, en: 'Walking the block', de: 'Ein Spaziergang um den Block', span: '' },
+  { src: `${IMG}/lifestyle-stadium-hood.jpg`, en: 'Hood up at the game', de: 'Kapuze auf beim Spiel', span: '' },
 ]
+const shots = data.map(s => ({ src: s.src, alt: loc === 'de' ? s.de : s.en, span: s.span }))
 </script>
 
 @section('content')
@@ -23,9 +25,9 @@ const shots = [
       <img src="/assets/images/stamped/lifestyle-dumbo.jpg" alt="" class="absolute inset-0 h-full w-full object-cover object-top" fetchpriority="high">
       <div class="absolute inset-0 bg-black/35"></div>
       <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-[#f7f1e3]">
-        <p class="text-[11px] font-semibold uppercase tracking-[0.28em]">Fall / Winter</p>
-        <h1 class="mt-3 font-display text-6xl md:text-7xl">The Lookbook</h1>
-        <p class="mt-3 max-w-md text-sm text-[#f7f1e3]/90">Worn across the five boroughs — from the waterfront to the upper deck.</p>
+        <p class="text-[11px] font-semibold uppercase tracking-[0.28em]">{t:lookbook.season}</p>
+        <h1 class="mt-3 font-display text-6xl md:text-7xl">{t:lookbook.title}</h1>
+        <p class="mt-3 max-w-md text-sm text-[#f7f1e3]/90">{t:lookbook.hero_copy}</p>
       </div>
     </div>
   </section>
@@ -41,9 +43,9 @@ const shots = [
     </div>
 
     <div class="mt-16 text-center">
-      <h2 class="font-display text-4xl text-stone-900">Wear the city</h2>
-      <p class="mx-auto mt-3 max-w-md text-stone-600">Every piece is designed and printed in small batches in New York.</p>
-      <a href="/products" data-stx-link class="mt-8 inline-flex bg-stone-900 px-10 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] transition-colors hover:bg-stone-700">Shop the collection</a>
+      <h2 class="font-display text-4xl text-stone-900">{t:lookbook.outro_title}</h2>
+      <p class="mx-auto mt-3 max-w-md text-stone-600">{t:lookbook.outro_copy}</p>
+      <a href="/products" data-stx-link class="mt-8 inline-flex bg-stone-900 px-10 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] transition-colors hover:bg-stone-700">{t:lookbook.cta}</a>
     </div>
   </section>
 @endsection

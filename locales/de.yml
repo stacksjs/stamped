@@ -1,14 +1,285 @@
-button:
-  about: Über
-  back: Zurück
-  go: Los
-  home: Startseite
-  toggle_dark: Dunkelmodus umschalten
-  toggle_langs: Sprachen ändern
-intro:
-  desc: Rapid Application Development
-  dynamic-route: Demo einer dynamischen Route
-  hi: Hi, {name}!
-  aka: Auch bekannt als
-  whats-your-name: Wie heißt du?
-not-found: Nicht gefunden
+# Deutsch (German). Mirrors en.yml key-for-key; missing keys fall back to
+# the default locale (en) then to the key itself.
+announce:
+  message: Kostenloser Versand für US-Bestellungen über $85 · In kleinen Mengen in New York gefertigt
+
+coming:
+  eyebrow: Bald verfügbar
+  title: Demnächst
+  copy: Wir legen letzte Hand an das neue Stamped. Hinterlass deine E-Mail und wir sagen dir Bescheid, sobald die Türen öffnen.
+  notify: Benachrichtige mich
+  thanks: Danke — wir melden uns.
+
+nav:
+  shop: Shop
+  collections: Kollektionen
+  lookbook: Lookbook
+  about: Über uns
+  search: Suche
+  account: Konto
+  cart: Warenkorb
+  menu: Menü
+
+common:
+  shop_all: Alles ansehen
+  shop_now: Jetzt einkaufen
+  view_all: Alle ansehen
+  view: Ansehen
+  add_to_bag: In den Warenkorb
+  keep_shopping: Weiter einkaufen
+  subscribe: Abonnieren
+  join: Beitreten
+  email_address: E-Mail-Adresse
+  pieces: Teile
+  piece: Teil
+
+home:
+  hero_title: Neuheiten
+  featured_eyebrow: Unser Klassiker
+  collection_title: Die Kollektion entdecken
+  gallery_title: I ❤ New York
+  newsletter_title: Newsletter abonnieren
+  newsletter_copy: Früher Zugang zu neuen Drops, Restocks und gelegentlich ein Brief aus der Stadt. Kein Spam.
+  vp_shipping_title: Kostenloser US-Versand
+  vp_shipping_copy: Bei jeder Bestellung über $85, Versand innerhalb von zwei Werktagen.
+  vp_cotton_title: Schwere Baumwolle
+  vp_cotton_copy: Stückgefärbt, vorgewaschen und gemacht, um die Saison zu überdauern.
+  vp_made_title: Hergestellt in New York
+  vp_made_copy: In kleinen Mengen in der Stadt entworfen und von Hand bedruckt.
+
+shop:
+  eyebrow: Die Kollektion
+  title: Alles ansehen
+  subtitle: entworfen und gedruckt in New York
+  filter_all: Alle
+
+collections:
+  eyebrow: Nach Kategorie stöbern
+  title: Kollektionen
+  shop_cta: Einkaufen
+
+product:
+  home: Start
+  shop: Shop
+  size: Größe
+  size_guide: Größentabelle
+  description: Beschreibung
+  details: Details & Pflege
+  shipping_returns: Versand & Rückgabe
+  shipping_returns_copy: Kostenloser US-Versand ab $85, Versand innerhalb von zwei Werktagen. 30 Tage Rückgaberecht für ungetragene Artikel.
+  added: Zum Warenkorb hinzugefügt ✓
+  view_bag: Warenkorb ansehen
+  related: Das könnte dir auch gefallen
+  not_found_title: Dieses Teil konnten wir nicht finden
+  not_found_copy: Vielleicht ist es ausverkauft oder umgezogen. Sieh dir den Rest der Kollektion an.
+
+filters:
+  category_tees: T-Shirts
+  category_hoodies: Hoodies
+  category_crewnecks: Sweatshirts
+
+cart:
+  eyebrow: Dein Warenkorb
+  title: Warenkorb
+  ready_one: Artikel versandbereit.
+  ready_many: Artikel versandbereit.
+  empty: Dein Warenkorb ist leer.
+  remove: Entfernen
+  size_label: Größe
+
+summary:
+  title: Bestellübersicht
+  subtotal: Zwischensumme
+  shipping: Versand
+  total: Gesamt
+  free: Kostenlos
+  checkout: Zur Kasse
+  free_shipping_prefix: Noch
+  free_shipping_suffix: bis zum kostenlosen Versand.
+
+checkout:
+  step_contact: Kontakt
+  step_shipping: Versand
+  step_payment: Zahlung
+  contact_title: Kontakt
+  contact_copy: Wir senden deinen Beleg und die Sendungsverfolgung hierhin.
+  email_offers: Schick mir Neuigkeiten und Angebote per E-Mail
+  back_to_bag: Zurück zum Warenkorb
+  continue_to_shipping: Weiter zum Versand
+  shipping_title: Lieferadresse
+  shipping_copy: Wohin sollen wir deine Bestellung schicken?
+  first_name: Vorname
+  last_name: Nachname
+  address: Adresse
+  city: Stadt
+  state: Bundesland
+  zip: PLZ
+  delivery_method: Versandart
+  delivery_standard: Standard · 3–5 Werktage
+  delivery_express: Express · 1–2 Werktage
+  back_to_contact: Zurück zum Kontakt
+  continue_to_payment: Weiter zur Zahlung
+  payment_title: Zahlung
+  payment_copy: Alle Transaktionen sind sicher und verschlüsselt.
+  card_number: Kartennummer
+  expiration: Gültig bis
+  cvc: Prüfziffer
+  name_on_card: Name auf der Karte
+  back_to_shipping: Zurück zum Versand
+  pay: Bezahlen
+  demo_note: Demo-Kasse — es wird keine Karte belastet.
+  thank_you: Vielen Dank
+  order: Bestellung
+  confirmed_copy: Deine Bestellung ist bestätigt. Ein Beleg ist auf dem Weg in dein Postfach, und wir senden dir die Sendungsverfolgung, sobald sie verschickt wird.
+  continue_shopping: Weiter einkaufen
+  qty: Menge
+
+lookbook:
+  season: Herbst / Winter
+  title: Das Lookbook
+  hero_copy: Getragen in allen fünf Stadtbezirken — vom Wasser bis zur Tribüne.
+  outro_title: Trag die Stadt
+  outro_copy: Jedes Teil wird in kleinen Mengen in New York entworfen und gedruckt.
+  cta: Die Kollektion entdecken
+
+about:
+  eyebrow: Gegründet in New York
+  title: Unsere Geschichte
+  studio_eyebrow: Das Studio
+  studio_title: Schwere Teile, in kleinen Mengen gefertigt — in der Stadt, die wir lieben.
+  studio_p1: Stamped begann mit einem einzigen T-Shirt und einer einfachen Idee — ein New-York-Basic zu machen, das man wirklich behalten will — schwer, ehrlich und gemacht, um gut zu altern. Keine Fast Fashion, keine endlosen Drops. Nur eine kleine Kollektion von Teilen, die wir selbst tragen.
+  studio_p2: Alles wird in unserem Studio entworfen und in limitierten Auflagen von Hand bedruckt. Wir stückfärben für das eingetragene Gefühl, doppelnähen die Nähte, auf die es ankommt, und halten die Prints weich, damit sie nie reißen. Wenn eine Auflage ausverkauft ist, ist sie weg — und wir machen mit der nächsten weiter.
+  pillar1_title: Hier gemacht
+  pillar1_copy: In New York entworfen und gedruckt, in Auflagen klein genug, um jedes Teil von Hand zu prüfen.
+  pillar2_title: Für die Ewigkeit gemacht
+  pillar2_copy: Schwere, stückgefärbte Baumwolle, die mit dem Tragen weicher wird, statt zu zerfallen.
+  pillar3_title: Ehrlich gehalten
+  pillar3_copy: Faire Preise, keine Rabattspielchen und eine kleine Kollektion, hinter der wir wirklich stehen.
+  city_title: Aus der Stadt, für die Stadt
+  city_copy: Unsere Teile werden dort fotografiert, wo wir sie tragen — am Wasser, im Park, auf der Tribüne, im letzten Zug nach Hause. Genau darum geht es — Kleidung für den Alltag in der Stadt, nicht für den Laufsteg.
+  city_cta: Zum Lookbook
+
+contact:
+  eyebrow: Wir helfen gern
+  title: Kontakt aufnehmen
+  copy: Fragen zu Größen, einer Bestellung oder eine Großhandelsanfrage? Schreib uns — wir antworten meist innerhalb eines Tages.
+  name: Name
+  email: E-Mail
+  subject: Betreff
+  message: Nachricht
+  send: Nachricht senden
+  email_label: E-Mail
+  studio_label: Studio
+  studio_value: Brooklyn, New York
+  studio_hint: Nur nach Vereinbarung
+  hours_label: Öffnungszeiten
+  hours_value: Mo–Fr · 9–18 Uhr ET
+  follow_label: Folgen
+
+faq:
+  eyebrow: Gut zu wissen
+  title: Häufige Fragen
+  q1: Wie fallen eure Teile aus?
+  a1: Unsere T-Shirts sind boxy und locker geschnitten — wenn du eine klassische Passform bevorzugst, wähle eine Nummer kleiner. Hoodies sind oversized mit fallenden Schultern. Jede Produktseite nennt die genaue Passform und das Stoffgewicht.
+  q2: Wann wird meine Bestellung versendet?
+  a2: Vorrätige Bestellungen werden innerhalb von zwei Werktagen aus New York versendet. Du erhältst einen Tracking-Link per E-Mail, sobald sie unterwegs ist.
+  q3: Versendet ihr international?
+  a3: Ja. Der internationale Versand wird an der Kasse berechnet. Zölle und Steuern können bei der Lieferung von deinem lokalen Versanddienstleister erhoben werden.
+  q4: Wie ist eure Rückgaberichtlinie?
+  a4: Ungetragene, ungewaschene Artikel können innerhalb von 30 Tagen für eine Rückerstattung oder einen Umtausch zurückgegeben werden. Starte eine Rückgabe über dein Konto oder per E-Mail.
+  q5: Wie pflege ich meine Teile?
+  a5: Auf links bei kalt waschen, hängend trocknen oder im Trockner bei niedriger Stufe. Den Print nicht bügeln. Unsere schwere Baumwolle ist vorgewaschen und behält ihre Form.
+  q6: Kommen ausverkaufte Teile zurück?
+  a6: Manchmal. Wir fertigen in kleinen Mengen, daher werden beliebte Teile gelegentlich nachproduziert — trag dich in die Liste ein, um es zuerst zu erfahren.
+  cta_title: Noch eine Frage?
+  cta_copy: Wir helfen gern bei Größen, Bestellungen und allem anderen.
+  cta_button: Kontaktiere uns
+
+search:
+  title: Suche
+  placeholder: T-Shirts, Hoodies, Farben suchen…
+  results: Ergebnisse
+  empty_prefix: Keine Teile passen zu dieser Suche. Versuch einen anderen Begriff oder
+  empty_link: sieh dir alles an
+
+account:
+  signin_title: Anmelden
+  signin_copy: Willkommen zurück. Melde dich an, um Bestellungen zu verfolgen und schneller zur Kasse zu gehen.
+  password: Passwort
+  forgot: Vergessen?
+  signin_button: Anmelden
+  signin_switch: Neu hier?
+  signin_switch_link: Konto erstellen
+  register_title: Konto erstellen
+  register_copy: Speichere deine Daten, verfolge Bestellungen und erhalte frühen Zugang zu neuen Drops.
+  register_offers: Schick mir E-Mails über neue Drops und Restocks.
+  register_button: Konto erstellen
+  register_switch: Hast du schon ein Konto?
+  register_switch_link: Anmelden
+
+footer:
+  tagline: Schwere, vintage-inspirierte New-York-Mode — entworfen und in kleinen Mengen gedruckt in der Stadt, nach der sie benannt ist.
+  col_shop: Shop
+  col_help: Hilfe
+  col_company: Unternehmen
+  link_all_products: Alle Produkte
+  link_tees: T-Shirts
+  link_hoodies: Hoodies
+  link_lookbook: Lookbook
+  link_contact: Kontakt
+  link_faq: Häufige Fragen
+  link_shipping: Versand
+  link_returns: Rückgabe
+  link_about: Unsere Geschichte
+  link_terms: AGB
+  link_privacy: Datenschutz
+  rights: Alle Rechte vorbehalten.
+  terms_policies: AGB & Richtlinien
+  instagram: Instagram
+  language: Sprache
+
+policies:
+  label: Richtlinien
+  sample_note: Beispiel-Richtlinientext für diesen Demo-Shop.
+  shipping_title: Versand
+  shipping_h1: Bearbeitung
+  shipping_p1: Vorrätige Bestellungen werden innerhalb von zwei Werktagen aus New York verpackt und versendet. Du erhältst eine Bestätigungs-E-Mail mit Sendungsverfolgung, sobald deine Bestellung unterwegs ist.
+  shipping_h2: Inland (USA)
+  shipping_p2: Der Standardversand kostet pauschal $6 und ist ab $85 kostenlos — in der Regel 3–5 Werktage. Expressversand (1–2 Werktage) ist an der Kasse verfügbar.
+  shipping_h3: International
+  shipping_p3: Wir versenden weltweit. Die Versandkosten werden an der Kasse je nach Ziel und Gewicht berechnet. Etwaige Zölle oder Einfuhrsteuern trägt der Empfänger und können bei der Lieferung erhoben werden.
+  shipping_h4: Verlorene oder verspätete Pakete
+  shipping_p4_prefix: Wenn deine Sendungsverfolgung mehrere Tage lang nicht aktualisiert wurde, melde dich über
+  shipping_p4_link: unsere Kontaktseite
+  shipping_p4_suffix: und wir gehen der Sache beim Versanddienstleister nach.
+  returns_title: Rückgabe & Umtausch
+  returns_h1: 30-Tage-Frist
+  returns_p1: Ungetragene, ungewaschene Artikel mit angehängten Etiketten können innerhalb von 30 Tagen nach Lieferung für eine Rückerstattung auf das ursprüngliche Zahlungsmittel zurückgegeben oder gegen eine andere Größe umgetauscht werden.
+  returns_h2: So startest du eine Rückgabe
+  returns_p2: Melde dich in deinem Konto an und öffne die Bestellung oder schreib uns mit deiner Bestellnummer. Für US-Rückgaben senden wir ein vorfrankiertes Etikett; die internationale Rücksendung trägt der Kunde.
+  returns_h3: Rückerstattungen
+  returns_p3: Sobald deine Rückgabe eingegangen und geprüft ist, erfolgt die Rückerstattung innerhalb von 3–5 Werktagen. Es kann einige Tage länger dauern, bis deine Bank die Gutschrift verbucht.
+  returns_h4: Endgültiger Verkauf
+  returns_p4: Limitierte und klar als Final Sale gekennzeichnete Teile können nicht zurückgegeben oder umgetauscht werden. Die Produktseite weist immer vor dem Kauf darauf hin.
+  terms_title: Allgemeine Geschäftsbedingungen
+  terms_h1: Überblick
+  terms_p1: Durch die Nutzung dieser Website und die Aufgabe einer Bestellung stimmst du diesen Bedingungen zu. Wir können sie von Zeit zu Zeit aktualisieren; es gilt die hier veröffentlichte Version für deine Bestellung.
+  terms_h2: Bestellungen & Preise
+  terms_p2: Alle Preise sind in US-Dollar angegeben. Wir behalten uns das Recht vor, Preisfehler zu korrigieren und Mengen zu begrenzen. Eine Bestellung ist bestätigt, sobald du eine Bestätigungs-E-Mail erhältst.
+  terms_h3: Produkte
+  terms_p3: Da unsere Teile stückgefärbt und in kleinen Mengen gedruckt werden, sind leichte Abweichungen zwischen den Artikeln normal und Teil des Charakters — kein Mangel.
+  terms_h4: Geistiges Eigentum
+  terms_p4: Alle Grafiken, Designs und Inhalte auf dieser Website gehören Stamped und dürfen ohne Genehmigung nicht reproduziert werden.
+  terms_h5: Kontakt
+  terms_p5_prefix: Fragen zu diesen Bedingungen? Erreiche uns über
+  terms_p5_link: unsere Kontaktseite
+  privacy_title: Datenschutz
+  privacy_h1: Was wir erfassen
+  privacy_p1: Wir erfassen die Angaben, die du uns zur Abwicklung einer Bestellung machst — Name, Lieferadresse, E-Mail und Zahlungsbestätigung — sowie grundlegende, datenschutzfreundliche Analysen zur Nutzung der Website.
+  privacy_h2: Wie wir sie verwenden
+  privacy_p2: Deine Daten werden verwendet, um Bestellungen zu bearbeiten, Support zu leisten und — nur mit deiner Zustimmung — gelegentlich Neuigkeiten über neue Releases zu senden. Wir verkaufen deine Daten niemals.
+  privacy_h3: Zahlungen
+  privacy_p3: Kartendaten werden von unserem Zahlungsdienstleister verarbeitet und niemals auf unseren Servern gespeichert.
+  privacy_h4: Deine Wahlmöglichkeiten
+  privacy_p4_prefix: Du kannst dich jederzeit von E-Mails abmelden und eine Kopie oder Löschung deiner Daten anfordern, indem du uns über
+  privacy_p4_link: unsere Kontaktseite

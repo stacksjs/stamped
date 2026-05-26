@@ -6,8 +6,9 @@
 <script server>
 const path = require('path')
 const { getProducts, priceLabel } = require(path.resolve(process.cwd(), 'resources/functions/catalog.ts'))
+const loc = (typeof locale !== 'undefined' && locale === 'de') ? 'de' : 'en'
 
-const all = getProducts()
+const all = getProducts(loc)
 const tiles = all.map(p => ({
   slug: p.slug,
   name: p.name,
@@ -20,7 +21,15 @@ const tiles = all.map(p => ({
   badge: p.badge || '',
 }))
 
-const categories = ['All', ...Array.from(new Set(all.map(p => p.category)))]
+// data-filter/data-category use the stable English category key (for the
+// client-side matcher); the visible label is a {t:} marker.
+const labelMarker = {
+  All: '{t:shop.filter_all}',
+  Tees: '{t:filters.category_tees}',
+  Hoodies: '{t:filters.category_hoodies}',
+  Crewnecks: '{t:filters.category_crewnecks}',
+}
+const categories = ['All', ...Array.from(new Set(all.map(p => p.category)))].map(c => ({ key: c, label: labelMarker[c] || c }))
 const count = all.length
 </script>
 
@@ -29,9 +38,9 @@ const count = all.length
 
     <!-- Page header -->
     <header class="text-center">
-      <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">The collection</p>
-      <h1 class="mt-3 font-display text-5xl text-stone-900 md:text-6xl">Shop all</h1>
-      <p class="mt-3 text-stone-600">{{ count }} pieces · designed and printed in New York</p>
+      <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">{t:shop.eyebrow}</p>
+      <h1 class="mt-3 font-display text-5xl text-stone-900 md:text-6xl">{t:shop.title}</h1>
+      <p class="mt-3 text-stone-600">{{ count }} {t:common.pieces} · {t:shop.subtitle}</p>
     </header>
 
     <!-- Filter bar (client-side) -->
@@ -39,10 +48,10 @@ const count = all.length
       @foreach (categories as cat)
         <button
           type="button"
-          data-filter="{{ cat }}"
+          data-filter="{{ cat.key }}"
           class="rounded-full border border-stone-900/15 px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-600 transition-colors hover:border-stone-900 hover:text-stone-900 data-[active=true]:border-stone-900 data-[active=true]:bg-stone-900 data-[active=true]:text-[#f7f1e3]"
-          {{ cat === 'All' ? 'data-active=true' : '' }}
-        >{{ cat }}</button>
+          {{ cat.key === 'All' ? 'data-active=true' : '' }}
+        >{{ cat.label }}</button>
       @endforeach
     </div>
 

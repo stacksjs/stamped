@@ -5,8 +5,9 @@
 <script server>
 const path = require('path')
 const { getProducts, priceLabel } = require(path.resolve(process.cwd(), 'resources/functions/catalog.ts'))
+const loc = (typeof locale !== 'undefined' && locale === 'de') ? 'de' : 'en'
 
-const all = getProducts()
+const all = getProducts(loc)
 // UI-only sample bag. Wire to the storefront cart cookie + carts table later.
 const sample = [
   { slug: 'ny-tee', size: 'M', qty: 1 },
@@ -30,31 +31,31 @@ const items = sample.map((s, idx) => {
   }
 })
 
-const FREE_SHIPPING_THRESHOLD = 75
+const FREE_SHIPPING_THRESHOLD = 85
 const subtotal = items.reduce((s, i) => s + i.lineTotal, 0)
 const shipping = subtotal <= 0 ? 0 : (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 6)
 const total = subtotal + shipping
 const remainingForFree = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal)
 
 const subtotalLabel = priceLabel(subtotal)
-const shippingLabel = shipping === 0 ? 'Free' : priceLabel(shipping)
+const shippingLabel = shipping === 0 ? '{t:summary.free}' : priceLabel(shipping)
 const totalLabel = priceLabel(total)
-const freeShippingNote = (shipping > 0 && remainingForFree > 0)
-  ? `Add ${priceLabel(remainingForFree)} more for free shipping.`
-  : ''
+const freeRemainingLabel = (shipping > 0 && remainingForFree > 0) ? priceLabel(remainingForFree) : ''
 </script>
 
 @section('content')
   <div class="mx-auto max-w-5xl px-6 py-12 md:py-16">
 
-    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">Your bag</p>
-    <h1 class="mt-2 font-display text-5xl text-stone-900">Shopping bag</h1>
-    <p class="mt-2 text-stone-600">{{ items.length }} item{{ items.length === 1 ? '' : 's' }}{{ items.length > 0 ? ' ready to ship' : '' }}.</p>
+    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">{t:cart.eyebrow}</p>
+    <h1 class="mt-2 font-display text-5xl text-stone-900">{t:cart.title}</h1>
+    @if (items.length > 0)
+      <p class="mt-2 text-stone-600">{{ items.length }} @if (items.length === 1){t:cart.ready_one}@else{t:cart.ready_many}@endif</p>
+    @endif
 
     @if (items.length === 0)
       <div class="mt-12 rounded-sm border border-dashed border-stone-900/20 bg-[#efe7d4] p-16 text-center">
-        <p class="font-medium text-stone-700">Your bag is empty.</p>
-        <a href="/products" data-stx-link class="mt-6 inline-flex bg-stone-900 px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] hover:bg-stone-700">Shop all</a>
+        <p class="font-medium text-stone-700">{t:cart.empty}</p>
+        <a href="/products" data-stx-link class="mt-6 inline-flex bg-stone-900 px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] hover:bg-stone-700">{t:common.shop_all}</a>
       </div>
     @else
       <div class="mt-10 grid items-start gap-12 lg:grid-cols-[1.7fr_1fr]">
@@ -68,32 +69,30 @@ const freeShippingNote = (shipping > 0 && remainingForFree > 0)
                 <div class="flex items-start justify-between gap-3">
                   <div>
                     <a href="/products/{{ item.slug }}" data-stx-link class="font-display text-lg text-stone-900 hover:underline">{{ item.name }}</a>
-                    <p class="mt-0.5 text-xs uppercase tracking-[0.12em] text-stone-500">{{ item.color }} · Size {{ item.size }}</p>
+                    <p class="mt-0.5 text-xs uppercase tracking-[0.12em] text-stone-500">{{ item.color }} · {t:cart.size_label} {{ item.size }}</p>
                   </div>
                   <p class="font-medium text-stone-900 whitespace-nowrap">{{ item.lineTotalLabel }}</p>
                 </div>
                 <div class="mt-auto flex items-end justify-between pt-4">
                   <div class="inline-flex items-center rounded-full border border-stone-900/20">
-                    <button type="button" class="px-3.5 py-2 text-stone-500 hover:text-stone-900" aria-label="Decrease">−</button>
+                    <button type="button" class="px-3.5 py-2 text-stone-500 hover:text-stone-900" aria-label="−">−</button>
                     <span class="min-w-[2rem] text-center text-sm font-medium text-stone-900">{{ item.qty }}</span>
-                    <button type="button" class="px-3.5 py-2 text-stone-500 hover:text-stone-900" aria-label="Increase">+</button>
+                    <button type="button" class="px-3.5 py-2 text-stone-500 hover:text-stone-900" aria-label="+">+</button>
                   </div>
-                  <button type="button" class="text-xs uppercase tracking-[0.12em] text-stone-500 underline underline-offset-4 hover:text-stone-900">Remove</button>
+                  <button type="button" class="text-xs uppercase tracking-[0.12em] text-stone-500 underline underline-offset-4 hover:text-stone-900">{t:cart.remove}</button>
                 </div>
               </div>
             </article>
           @endforeach
         </div>
 
-        <OrderSummary
+        <BagSummary
           subtotalLabel="{{ subtotalLabel }}"
           shippingLabel="{{ shippingLabel }}"
           totalLabel="{{ totalLabel }}"
-          freeShippingNote="{{ freeShippingNote }}"
+          freeRemainingLabel="{{ freeRemainingLabel }}"
           ctaHref="/checkout/contact"
-          ctaLabel="Checkout"
           secondaryHref="/products"
-          secondaryLabel="Keep shopping"
           :sticky="true"
         />
       </div>

@@ -10,31 +10,32 @@ interface FooterProps {
 }
 
 const {
+  // Titles/labels are {t:} markers — substituted per-locale after render.
   columns = [
     {
-      title: 'Shop',
+      title: '{t:footer.col_shop}',
       links: [
-        { href: '/products', label: 'All products' },
-        { href: '/collections/tees', label: 'Tees' },
-        { href: '/collections/hoodies', label: 'Hoodies' },
-        { href: '/lookbook', label: 'Lookbook' },
+        { href: '/products', label: '{t:footer.link_all_products}' },
+        { href: '/collections/tees', label: '{t:footer.link_tees}' },
+        { href: '/collections/hoodies', label: '{t:footer.link_hoodies}' },
+        { href: '/lookbook', label: '{t:footer.link_lookbook}' },
       ],
     },
     {
-      title: 'Help',
+      title: '{t:footer.col_help}',
       links: [
-        { href: '/contact', label: 'Contact' },
-        { href: '/faq', label: 'FAQ' },
-        { href: '/policies/shipping', label: 'Shipping' },
-        { href: '/policies/returns', label: 'Returns' },
+        { href: '/contact', label: '{t:footer.link_contact}' },
+        { href: '/faq', label: '{t:footer.link_faq}' },
+        { href: '/policies/shipping', label: '{t:footer.link_shipping}' },
+        { href: '/policies/returns', label: '{t:footer.link_returns}' },
       ],
     },
     {
-      title: 'Company',
+      title: '{t:footer.col_company}',
       links: [
-        { href: '/about', label: 'Our story' },
-        { href: '/policies/terms', label: 'Terms' },
-        { href: '/policies/privacy', label: 'Privacy' },
+        { href: '/about', label: '{t:footer.link_about}' },
+        { href: '/policies/terms', label: '{t:footer.link_terms}' },
+        { href: '/policies/privacy', label: '{t:footer.link_privacy}' },
       ],
     },
   ],
@@ -49,18 +50,18 @@ const {
     <div class="max-w-sm">
       <img src="/assets/images/stamped/stamped-logo.png" alt="Stamped" width="150" height="56" class="h-12 w-auto" decoding="async">
       <p class="mt-4 text-sm leading-relaxed text-stone-600">
-        Heavyweight, vintage-inspired New York apparel — designed and printed in small batches in the city it's named for.
+        {t:footer.tagline}
       </p>
       <form action="/api/newsletter/subscribe" method="POST" class="mt-6 flex max-w-xs items-center border-b border-stone-900/30 focus-within:border-stone-900 transition-colors">
         <input
           type="email"
           name="email"
           required
-          placeholder="Email address"
+          placeholder="{t:common.email_address}"
           autocomplete="email"
           class="w-full bg-transparent py-2 text-sm text-stone-900 placeholder:text-stone-500 focus:outline-none"
         >
-        <button type="submit" class="shrink-0 pl-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 hover:text-stone-900" aria-label="Subscribe">Join</button>
+        <button type="submit" class="shrink-0 pl-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 hover:text-stone-900" aria-label="{t:common.subscribe}">{t:common.join}</button>
       </form>
     </div>
 
@@ -78,12 +79,12 @@ const {
 
   <div class="border-t border-stone-900/10">
     <div class="mx-auto flex max-w-7xl flex-col-reverse items-center justify-between gap-3 px-6 py-6 text-xs text-stone-500 md:flex-row">
-      <p>© {{ year }} Stamped. All rights reserved.</p>
+      <p>© {{ year }} Stamped. {t:footer.rights}</p>
       <div class="flex items-center gap-5">
-        <a href="/policies/terms" data-stx-link class="hover:text-stone-900">Terms &amp; Policies</a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:text-stone-900" aria-label="Instagram">
+        <a href="/policies/terms" data-stx-link class="hover:text-stone-900">{t:footer.terms_policies}</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:text-stone-900" aria-label="{t:footer.instagram}">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
-          Instagram
+          {t:footer.instagram}
         </a>
       </div>
     </div>

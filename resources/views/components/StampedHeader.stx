@@ -10,11 +10,12 @@ interface HeaderProps {
 }
 
 const {
+  // Labels are {t:} markers — substituted per-locale after render.
   links = [
-    { href: '/products', label: 'Shop' },
-    { href: '/collections', label: 'Collections' },
-    { href: '/lookbook', label: 'Lookbook' },
-    { href: '/about', label: 'About' },
+    { href: '/products', label: '{t:nav.shop}' },
+    { href: '/collections', label: '{t:nav.collections}' },
+    { href: '/lookbook', label: '{t:nav.lookbook}' },
+    { href: '/about', label: '{t:nav.about}' },
   ],
   cartCount = 0,
 } = defineProps<HeaderProps>()
@@ -29,10 +30,10 @@ const {
         type="button"
         data-stx-menu-open
         class="md:hidden -ml-1 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 hover:text-stone-900"
-        aria-label="Open menu"
+        aria-label="{t:nav.menu}"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" /></svg>
-        Menu
+        {t:nav.menu}
       </button>
       <nav class="hidden md:flex items-center gap-7 text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-600" data-stx-nav>
         @foreach (links as link)
@@ -51,15 +52,20 @@ const {
       <img src="/assets/images/stamped/stamped-logo.png" alt="Stamped" width="132" height="49" class="h-[42px] w-auto" decoding="async">
     </a>
 
-    <!-- Right: search / account / cart -->
+    <!-- Right: language picker / search / account / cart -->
     <div class="flex items-center justify-end gap-1.5 sm:gap-3 text-stone-700">
-      <a href="/search" data-stx-link class="hidden sm:inline-flex p-2 rounded-full hover:text-stone-900 hover:bg-stone-900/5 transition-colors" aria-label="Search">
+      <div id="lang-picker" class="hidden sm:flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-stone-500" aria-label="{t:footer.language}">
+        <button type="button" data-lang="en" class="px-1.5 py-1 rounded hover:text-stone-900 aria-[current=true]:text-stone-900 aria-[current=true]:underline aria-[current=true]:underline-offset-4">EN</button>
+        <span class="text-stone-300" aria-hidden="true">/</span>
+        <button type="button" data-lang="de" class="px-1.5 py-1 rounded hover:text-stone-900 aria-[current=true]:text-stone-900 aria-[current=true]:underline aria-[current=true]:underline-offset-4">DE</button>
+      </div>
+      <a href="/search" data-stx-link class="hidden sm:inline-flex p-2 rounded-full hover:text-stone-900 hover:bg-stone-900/5 transition-colors" aria-label="{t:nav.search}">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
       </a>
-      <a href="/account/login" data-stx-link class="hidden sm:inline-flex p-2 rounded-full hover:text-stone-900 hover:bg-stone-900/5 transition-colors" aria-label="Account">
+      <a href="/account/login" data-stx-link class="hidden sm:inline-flex p-2 rounded-full hover:text-stone-900 hover:bg-stone-900/5 transition-colors" aria-label="{t:nav.account}">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
       </a>
-      <a href="/cart" data-stx-link class="relative inline-flex p-2 rounded-full hover:text-stone-900 hover:bg-stone-900/5 transition-colors" aria-label="Cart">
+      <a href="/cart" data-stx-link class="relative inline-flex p-2 rounded-full hover:text-stone-900 hover:bg-stone-900/5 transition-colors" aria-label="{t:nav.cart}">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-[19px] w-[19px]" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" /></svg>
         <span
           data-stx-cart-count
@@ -75,8 +81,12 @@ const {
       @foreach (links as link)
         <a href="{{ link.href }}" data-stx-link class="py-3 border-b border-stone-900/5 last:border-0 hover:text-stone-900">{{ link.label }}</a>
       @endforeach
-      <a href="/search" data-stx-link class="py-3 hover:text-stone-900">Search</a>
-      <a href="/account/login" data-stx-link class="py-3 hover:text-stone-900">Account</a>
+      <a href="/search" data-stx-link class="py-3 hover:text-stone-900">{t:nav.search}</a>
+      <a href="/account/login" data-stx-link class="py-3 hover:text-stone-900">{t:nav.account}</a>
+      <div class="flex items-center gap-3 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-stone-500">
+        <button type="button" data-lang="en" class="hover:text-stone-900 aria-[current=true]:text-stone-900">EN</button>
+        <button type="button" data-lang="de" class="hover:text-stone-900 aria-[current=true]:text-stone-900">DE</button>
+      </div>
     </nav>
   </div>
 </header>
