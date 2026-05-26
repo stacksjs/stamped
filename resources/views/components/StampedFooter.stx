@@ -9,8 +9,8 @@ interface FooterProps {
   year?: number
 }
 
+// Titles/labels are {t:} markers — substituted per-locale after render.
 const {
-  // Titles/labels are {t:} markers — substituted per-locale after render.
   columns = [
     {
       title: '{t:footer.col_shop}',
@@ -36,6 +36,7 @@ const {
         { href: '/about', label: '{t:footer.link_about}' },
         { href: '/policies/terms', label: '{t:footer.link_terms}' },
         { href: '/policies/privacy', label: '{t:footer.link_privacy}' },
+        { href: '/impressum', label: '{t:footer.link_impressum}' },
       ],
     },
   ],
@@ -52,17 +53,20 @@ const {
       <p class="mt-4 text-sm leading-relaxed text-stone-600">
         {t:footer.tagline}
       </p>
-      <form action="/api/newsletter/subscribe" method="POST" class="mt-6 flex max-w-xs items-center border-b border-stone-900/30 focus-within:border-stone-900 transition-colors">
-        <input
-          type="email"
-          name="email"
-          required
-          placeholder="{t:common.email_address}"
-          autocomplete="email"
-          class="w-full bg-transparent py-2 text-sm text-stone-900 placeholder:text-stone-500 focus:outline-none"
-        >
-        <button type="submit" class="shrink-0 pl-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 hover:text-stone-900" aria-label="{t:common.subscribe}">{t:common.join}</button>
-      </form>
+      <div data-stx-subscribe-wrap>
+        <form data-stx-subscribe action="/api/newsletter/subscribe" method="POST" class="mt-6 flex max-w-xs items-center border-b border-stone-900/30 focus-within:border-stone-900 transition-colors">
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="{t:common.email_address}"
+            autocomplete="email"
+            class="w-full bg-transparent py-2 text-sm text-stone-900 placeholder:text-stone-500 focus:outline-none"
+          >
+          <button type="submit" class="shrink-0 pl-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 hover:text-stone-900" aria-label="{t:common.subscribe}">{t:common.join}</button>
+        </form>
+        <p data-stx-subscribe-thanks class="mt-6 hidden text-sm font-medium text-stone-900">{t:common.subscribe_thanks}</p>
+      </div>
     </div>
 
     @foreach (columns as col)
@@ -81,6 +85,7 @@ const {
     <div class="mx-auto flex max-w-7xl flex-col-reverse items-center justify-between gap-3 px-6 py-6 text-xs text-stone-500 md:flex-row">
       <p>© {{ year }} Stamped. {t:footer.rights}</p>
       <div class="flex items-center gap-5">
+        <a href="/impressum" data-stx-link class="hover:text-stone-900">{t:footer.link_impressum}</a>
         <a href="/policies/terms" data-stx-link class="hover:text-stone-900">{t:footer.terms_policies}</a>
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:text-stone-900" aria-label="{t:footer.instagram}">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
@@ -90,3 +95,25 @@ const {
     </div>
   </div>
 </footer>
+
+<script data-stx-scoped>
+;(() => {
+  // Client-only subscribe UX for every [data-stx-subscribe] form (footer +
+  // home newsletter). No API: validate the email, hide the form, reveal the
+  // sibling [data-stx-subscribe-thanks]. Document-delegated + guarded so SPA
+  // fragment swaps don't stack listeners.
+  if (window.__stampedSubscribeWired) return
+  window.__stampedSubscribeWired = true
+  document.addEventListener('submit', (e) => {
+    const form = e.target instanceof Element ? e.target.closest('[data-stx-subscribe]') : null
+    if (!form) return
+    e.preventDefault()
+    const input = form.querySelector('input[type="email"]')
+    if (input && !input.checkValidity()) { input.reportValidity(); return }
+    const wrap = form.closest('[data-stx-subscribe-wrap]') || form.parentElement
+    const thanks = wrap && wrap.querySelector('[data-stx-subscribe-thanks]')
+    form.style.display = 'none'
+    if (thanks) thanks.classList.remove('hidden')
+  })
+})()
+</script>

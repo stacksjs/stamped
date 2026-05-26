@@ -32,6 +32,7 @@ common:
   email_address: Email address
   pieces: pieces
   piece: piece
+  subscribe_thanks: Thanks — you're on the list.
 
 home:
   hero_title: New arrivals
@@ -233,6 +234,7 @@ footer:
   link_about: Our story
   link_terms: Terms
   link_privacy: Privacy
+  link_impressum: Legal notice
   rights: All rights reserved.
   terms_policies: Terms & Policies
   instagram: Instagram
@@ -283,3 +285,24 @@ policies:
   privacy_h4: Your choices
   privacy_p4_prefix: You can unsubscribe from email at any time, and you may request a copy or deletion of your data by contacting us through
   privacy_p4_link: our contact page
+
+impressum:
+  title: Legal notice
+  note: Sample legal notice for this demo storefront — replace with your real company details before launch.
+  provider_h: Information pursuant to § 5 DDG
+  operator: Stamped Apparel GmbH
+  address_l1: Musterstraße 123
+  address_l2: 10115 Berlin, Germany
+  rep_h: Represented by
+  rep: Jane Doe (Managing Director)
+  contact_h: Contact
+  contact_phone_label: Phone
+  contact_email_label: Email
+  register_h: Register entry
+  register: Commercial register · Register court Amtsgericht Berlin-Charlottenburg · HRB 000000
+  vat_h: VAT ID
+  vat: VAT identification number pursuant to § 27a UStG — DE000000000
+  responsible_h: Responsible for content pursuant to § 18 (2) MStV
+  responsible: Jane Doe, address as above
+  dispute_h: Online dispute resolution
+  dispute: The European Commission provides a platform for online dispute resolution (ODR). We are neither obliged nor willing to take part in dispute resolution proceedings before a consumer arbitration board.

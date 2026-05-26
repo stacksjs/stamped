@@ -9,8 +9,8 @@ interface HeaderProps {
   cartCount?: number
 }
 
+// Nav labels are {t:} markers — substituted per-locale after render.
 const {
-  // Labels are {t:} markers — substituted per-locale after render.
   links = [
     { href: '/products', label: '{t:nav.shop}' },
     { href: '/collections', label: '{t:nav.collections}' },

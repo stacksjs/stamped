@@ -32,6 +32,7 @@ common:
   email_address: E-Mail-Adresse
   pieces: Teile
   piece: Teil
+  subscribe_thanks: Danke — du bist dabei.
 
 home:
   hero_title: Neuheiten
@@ -233,6 +234,7 @@ footer:
   link_about: Unsere Geschichte
   link_terms: AGB
   link_privacy: Datenschutz
+  link_impressum: Impressum
   rights: Alle Rechte vorbehalten.
   terms_policies: AGB & Richtlinien
   instagram: Instagram
@@ -283,3 +285,24 @@ policies:
   privacy_h4: Deine Wahlmöglichkeiten
   privacy_p4_prefix: Du kannst dich jederzeit von E-Mails abmelden und eine Kopie oder Löschung deiner Daten anfordern, indem du uns über
   privacy_p4_link: unsere Kontaktseite
+
+impressum:
+  title: Impressum
+  note: Beispiel-Impressum für diesen Demo-Shop — ersetze die Angaben vor dem Launch durch deine echten Unternehmensdaten.
+  provider_h: Angaben gemäß § 5 DDG
+  operator: Stamped Apparel GmbH
+  address_l1: Musterstraße 123
+  address_l2: 10115 Berlin, Deutschland
+  rep_h: Vertreten durch
+  rep: Jane Doe (Geschäftsführerin)
+  contact_h: Kontakt
+  contact_phone_label: Telefon
+  contact_email_label: E-Mail
+  register_h: Registereintrag
+  register: Handelsregister · Registergericht Amtsgericht Berlin-Charlottenburg · HRB 000000
+  vat_h: Umsatzsteuer-ID
+  vat: Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG — DE000000000
+  responsible_h: Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
+  responsible: Jane Doe, Anschrift wie oben
+  dispute_h: Online-Streitbeilegung
+  dispute: Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit. Wir sind weder verpflichtet noch bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.

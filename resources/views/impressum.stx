@@ -1,0 +1,42 @@
+@extends('layouts/storefront')
+
+@section('title', 'Impressum — Stamped')
+
+@section('content')
+  <article class="mx-auto max-w-2xl px-6 py-16">
+    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">{t:policies.label}</p>
+    <h1 class="mt-3 font-display text-5xl text-stone-900">{t:impressum.title}</h1>
+    <p class="mt-4 text-sm text-stone-500">{t:impressum.note}</p>
+
+    <div class="mt-10 space-y-8 leading-relaxed text-stone-600">
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">{t:impressum.provider_h}</h2>
+        <p class="mt-2">{t:impressum.operator}<br>{t:impressum.address_l1}<br>{t:impressum.address_l2}</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">{t:impressum.rep_h}</h2>
+        <p class="mt-2">{t:impressum.rep}</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">{t:impressum.contact_h}</h2>
+        <p class="mt-2">{t:impressum.contact_phone_label} +49 30 1234567<br>{t:impressum.contact_email_label} <a href="mailto:hello@stamped.example" class="underline underline-offset-2 hover:text-stone-900">hello@stamped.example</a></p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">{t:impressum.register_h}</h2>
+        <p class="mt-2">{t:impressum.register}</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">{t:impressum.vat_h}</h2>
+        <p class="mt-2">{t:impressum.vat}</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">{t:impressum.responsible_h}</h2>
+        <p class="mt-2">{t:impressum.responsible}</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">{t:impressum.dispute_h}</h2>
+        <p class="mt-2">{t:impressum.dispute}</p>
+      </section>
+    </div>
+  </article>
+@endsection

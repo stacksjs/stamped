@@ -123,10 +123,13 @@ const gallery = getLookbook(loc)
   <section class="mx-auto max-w-2xl px-6 py-20 text-center md:py-28">
     <h2 class="font-display text-4xl text-stone-900">{t:home.newsletter_title}</h2>
     <p class="mt-3 text-stone-600">{t:home.newsletter_copy}</p>
-    <form action="/api/newsletter/subscribe" method="POST" class="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row">
-      <input type="email" name="email" required placeholder="{t:common.email_address}" autocomplete="email" class="w-full border border-stone-900/30 bg-transparent px-4 py-3.5 text-sm text-stone-900 placeholder:text-stone-500 focus:border-stone-900 focus:outline-none">
-      <button type="submit" class="shrink-0 bg-stone-900 px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] transition-colors hover:bg-stone-700">{t:common.subscribe}</button>
-    </form>
+    <div data-stx-subscribe-wrap class="mx-auto mt-8 max-w-md">
+      <form data-stx-subscribe action="/api/newsletter/subscribe" method="POST" class="flex flex-col gap-3 sm:flex-row">
+        <input type="email" name="email" required placeholder="{t:common.email_address}" autocomplete="email" class="w-full border border-stone-900/30 bg-transparent px-4 py-3.5 text-sm text-stone-900 placeholder:text-stone-500 focus:border-stone-900 focus:outline-none">
+        <button type="submit" class="shrink-0 bg-stone-900 px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] transition-colors hover:bg-stone-700">{t:common.subscribe}</button>
+      </form>
+      <p data-stx-subscribe-thanks class="hidden text-stone-700">{t:common.subscribe_thanks}</p>
+    </div>
   </section>
 
 @endsection
