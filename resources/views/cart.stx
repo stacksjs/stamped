@@ -1,0 +1,102 @@
+@extends('layouts/storefront')
+
+@section('title', 'Your bag — Stamped')
+
+<script server>
+const path = require('path')
+const { getProducts, priceLabel } = require(path.resolve(process.cwd(), 'resources/functions/catalog.ts'))
+
+const all = getProducts()
+// UI-only sample bag. Wire to the storefront cart cookie + carts table later.
+const sample = [
+  { slug: 'ny-tee', size: 'M', qty: 1 },
+  { slug: 'ny-hoodie', size: 'L', qty: 1 },
+]
+
+const items = sample.map((s, idx) => {
+  const p = all.find(x => x.slug === s.slug)
+  const lineTotal = p.price * s.qty
+  return {
+    id: idx + 1,
+    slug: p.slug,
+    name: p.name,
+    color: p.color,
+    size: s.size,
+    qty: s.qty,
+    image: p.images[0],
+    priceLabel: priceLabel(p.price),
+    lineTotal,
+    lineTotalLabel: priceLabel(lineTotal),
+  }
+})
+
+const FREE_SHIPPING_THRESHOLD = 75
+const subtotal = items.reduce((s, i) => s + i.lineTotal, 0)
+const shipping = subtotal <= 0 ? 0 : (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 6)
+const total = subtotal + shipping
+const remainingForFree = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal)
+
+const subtotalLabel = priceLabel(subtotal)
+const shippingLabel = shipping === 0 ? 'Free' : priceLabel(shipping)
+const totalLabel = priceLabel(total)
+const freeShippingNote = (shipping > 0 && remainingForFree > 0)
+  ? `Add ${priceLabel(remainingForFree)} more for free shipping.`
+  : ''
+</script>
+
+@section('content')
+  <div class="mx-auto max-w-5xl px-6 py-12 md:py-16">
+
+    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">Your bag</p>
+    <h1 class="mt-2 font-display text-5xl text-stone-900">Shopping bag</h1>
+    <p class="mt-2 text-stone-600">{{ items.length }} item{{ items.length === 1 ? '' : 's' }}{{ items.length > 0 ? ' ready to ship' : '' }}.</p>
+
+    @if (items.length === 0)
+      <div class="mt-12 rounded-sm border border-dashed border-stone-900/20 bg-[#efe7d4] p-16 text-center">
+        <p class="font-medium text-stone-700">Your bag is empty.</p>
+        <a href="/products" data-stx-link class="mt-6 inline-flex bg-stone-900 px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] hover:bg-stone-700">Shop all</a>
+      </div>
+    @else
+      <div class="mt-10 grid items-start gap-12 lg:grid-cols-[1.7fr_1fr]">
+        <div class="divide-y divide-stone-900/10 border-y border-stone-900/10">
+          @foreach (items as item)
+            <article class="flex gap-5 py-6">
+              <a href="/products/{{ item.slug }}" data-stx-link class="block h-32 w-28 shrink-0 overflow-hidden rounded-sm bg-[#efe7d4]">
+                <img src="{{ item.image }}" alt="{{ item.name }}" class="h-full w-full object-cover">
+              </a>
+              <div class="flex flex-1 flex-col">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <a href="/products/{{ item.slug }}" data-stx-link class="font-display text-lg text-stone-900 hover:underline">{{ item.name }}</a>
+                    <p class="mt-0.5 text-xs uppercase tracking-[0.12em] text-stone-500">{{ item.color }} · Size {{ item.size }}</p>
+                  </div>
+                  <p class="font-medium text-stone-900 whitespace-nowrap">{{ item.lineTotalLabel }}</p>
+                </div>
+                <div class="mt-auto flex items-end justify-between pt-4">
+                  <div class="inline-flex items-center rounded-full border border-stone-900/20">
+                    <button type="button" class="px-3.5 py-2 text-stone-500 hover:text-stone-900" aria-label="Decrease">−</button>
+                    <span class="min-w-[2rem] text-center text-sm font-medium text-stone-900">{{ item.qty }}</span>
+                    <button type="button" class="px-3.5 py-2 text-stone-500 hover:text-stone-900" aria-label="Increase">+</button>
+                  </div>
+                  <button type="button" class="text-xs uppercase tracking-[0.12em] text-stone-500 underline underline-offset-4 hover:text-stone-900">Remove</button>
+                </div>
+              </div>
+            </article>
+          @endforeach
+        </div>
+
+        <OrderSummary
+          subtotalLabel="{{ subtotalLabel }}"
+          shippingLabel="{{ shippingLabel }}"
+          totalLabel="{{ totalLabel }}"
+          freeShippingNote="{{ freeShippingNote }}"
+          ctaHref="/checkout/contact"
+          ctaLabel="Checkout"
+          secondaryHref="/products"
+          secondaryLabel="Keep shopping"
+          :sticky="true"
+        />
+      </div>
+    @endif
+  </div>
+@endsection

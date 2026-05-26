@@ -1,0 +1,15 @@
+<script>
+interface AnnounceProps {
+  message?: string
+}
+
+const {
+  message = 'Complimentary shipping on U.S. orders over $75 · Made in small batches in New York',
+} = defineProps<AnnounceProps>()
+</script>
+
+<div class="bg-stone-900 text-[#f7f1e3]">
+  <div class="mx-auto max-w-7xl px-6 py-2.5 text-center text-[11px] font-medium uppercase tracking-[0.18em]">
+    {{ message }}
+  </div>
+</div>

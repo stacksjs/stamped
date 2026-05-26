@@ -1,0 +1,81 @@
+@extends('layouts/storefront')
+
+@section('title', 'Search — Stamped')
+
+<script server>
+const path = require('path')
+const { getProducts, priceLabel } = require(path.resolve(process.cwd(), 'resources/functions/catalog.ts'))
+const tiles = getProducts().map(p => ({
+  slug: p.slug,
+  name: p.name,
+  color: p.color,
+  category: p.category,
+  terms: `${p.name} ${p.color} ${p.category}`.toLowerCase(),
+  priceLabel: priceLabel(p.price),
+  compareAtLabel: p.compareAt ? priceLabel(p.compareAt) : '',
+  image: p.images[0],
+  hoverImage: p.images[1] || '',
+  badge: p.badge || '',
+}))
+</script>
+
+@section('content')
+  <div class="mx-auto max-w-7xl px-6 py-16">
+    <header class="mx-auto max-w-2xl text-center">
+      <h1 class="font-display text-5xl text-stone-900 md:text-6xl">Search</h1>
+      <div class="mt-8 flex items-center border-b-2 border-stone-900/30 focus-within:border-stone-900 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-400" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+        <input
+          type="search"
+          data-stx-search
+          autofocus
+          placeholder="Search tees, hoodies, colors…"
+          class="w-full bg-transparent px-3 py-3 text-lg text-stone-900 placeholder:text-stone-400 focus:outline-none"
+        >
+      </div>
+      <p class="mt-3 text-sm text-stone-500"><span data-stx-search-count>{{ tiles.length }}</span> results</p>
+    </header>
+
+    <div class="mt-12 grid grid-cols-2 gap-x-5 gap-y-12 lg:grid-cols-4" data-stx-search-grid>
+      @foreach (tiles as t)
+        <div data-terms="{{ t.terms }}">
+          <ProductTile
+            slug="{{ t.slug }}"
+            name="{{ t.name }}"
+            color="{{ t.color }}"
+            priceLabel="{{ t.priceLabel }}"
+            compareAtLabel="{{ t.compareAtLabel }}"
+            image="{{ t.image }}"
+            hoverImage="{{ t.hoverImage }}"
+            badge="{{ t.badge }}"
+          />
+        </div>
+      @endforeach
+    </div>
+    <p data-stx-search-empty class="mt-12 hidden text-center text-stone-500">No pieces match that search. Try another term, or <a href="/products" data-stx-link class="underline underline-offset-2 hover:text-stone-900">browse everything</a>.</p>
+  </div>
+
+  <script data-stx-scoped>
+  ;(() => {
+    if (window.__stampedSearchWired) return
+    window.__stampedSearchWired = true
+    document.addEventListener('input', (e) => {
+      const input = e.target instanceof Element ? e.target.closest('[data-stx-search]') : null
+      if (!input) return
+      const q = input.value.trim().toLowerCase()
+      const grid = document.querySelector('[data-stx-search-grid]')
+      if (!grid) return
+      let shown = 0
+      grid.querySelectorAll('[data-terms]').forEach((el) => {
+        const match = !q || el.getAttribute('data-terms').includes(q)
+        el.style.display = match ? '' : 'none'
+        if (match) shown++
+      })
+      const count = document.querySelector('[data-stx-search-count]')
+      if (count) count.textContent = String(shown)
+      const empty = document.querySelector('[data-stx-search-empty]')
+      if (empty) empty.classList.toggle('hidden', shown !== 0)
+    })
+  })()
+  </script>
+@endsection

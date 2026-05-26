@@ -1,0 +1,50 @@
+@extends('layouts/storefront')
+
+@section('title', 'Order confirmed — Stamped')
+
+<script server>
+const path = require('path')
+const { getProducts, priceLabel } = require(path.resolve(process.cwd(), 'resources/functions/catalog.ts'))
+const all = getProducts()
+const sample = [{ slug: 'ny-tee', qty: 1 }, { slug: 'ny-hoodie', qty: 1 }]
+const items = sample.map((s) => {
+  const p = all.find(x => x.slug === s.slug)
+  return { name: p.name, color: p.color, qty: s.qty, image: p.images[0], lineLabel: priceLabel(p.price * s.qty) }
+})
+const subtotal = items.reduce((sum, i, idx) => sum + all.find(x => x.slug === sample[idx].slug).price * i.qty, 0)
+const total = subtotal + (subtotal >= 75 ? 0 : 6)
+const totalLabel = priceLabel(total)
+const orderNo = 'ST-' + (10428 + (Date.now() % 1000))
+</script>
+
+@section('content')
+  <div class="mx-auto max-w-2xl px-6 py-20 text-center md:py-28">
+    <div class="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+    </div>
+    <p class="mt-6 text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">Order {{ orderNo }}</p>
+    <h1 class="mt-3 font-display text-5xl text-stone-900">Thank you</h1>
+    <p class="mt-3 text-stone-600">Your order is confirmed. A receipt is on its way to your inbox, and we'll email tracking once it ships.</p>
+
+    <div class="mt-10 divide-y divide-stone-900/10 border-y border-stone-900/10 text-left">
+      @foreach (items as item)
+        <div class="flex items-center gap-4 py-4">
+          <div class="h-16 w-14 shrink-0 overflow-hidden rounded-sm bg-[#efe7d4]">
+            <img src="{{ item.image }}" alt="" class="h-full w-full object-cover">
+          </div>
+          <div class="flex-1">
+            <p class="font-medium text-stone-900">{{ item.name }}</p>
+            <p class="text-xs uppercase tracking-[0.12em] text-stone-500">{{ item.color }} · Qty {{ item.qty }}</p>
+          </div>
+          <p class="font-medium text-stone-900">{{ item.lineLabel }}</p>
+        </div>
+      @endforeach
+      <div class="flex items-center justify-between py-4 text-base">
+        <span class="font-display text-stone-900">Total</span>
+        <span class="font-semibold text-stone-900">{{ totalLabel }}</span>
+      </div>
+    </div>
+
+    <a href="/products" data-stx-link class="mt-10 inline-flex bg-stone-900 px-10 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] transition-colors hover:bg-stone-700">Continue shopping</a>
+  </div>
+@endsection

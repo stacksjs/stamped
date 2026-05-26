@@ -1,0 +1,30 @@
+@extends('layouts/storefront')
+
+@section('title', 'Shipping — Stamped')
+
+@section('content')
+  <article class="mx-auto max-w-2xl px-6 py-16">
+    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">Policies</p>
+    <h1 class="mt-3 font-display text-5xl text-stone-900">Shipping</h1>
+    <p class="mt-4 text-sm text-stone-500">Sample policy copy for this demo storefront.</p>
+
+    <div class="mt-10 space-y-8 leading-relaxed text-stone-600">
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">Processing</h2>
+        <p class="mt-2">In-stock orders are packed and shipped from New York within two business days. You'll receive a confirmation email with tracking as soon as your order is on its way.</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">Domestic (U.S.)</h2>
+        <p class="mt-2">Standard shipping is a flat $6, and free on orders over $75 — typically 3–5 business days. Express delivery (1–2 business days) is available at checkout.</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">International</h2>
+        <p class="mt-2">We ship worldwide. Rates are calculated at checkout based on destination and weight. Any duties or import taxes are the responsibility of the recipient and may be collected on delivery.</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">Lost or delayed packages</h2>
+        <p class="mt-2">If your tracking hasn't updated in several days, reach out at <a href="/contact" data-stx-link class="underline underline-offset-2 hover:text-stone-900">our contact page</a> and we'll chase it down with the carrier.</p>
+      </section>
+    </div>
+  </article>
+@endsection

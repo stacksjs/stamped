@@ -1,0 +1,58 @@
+<script server>
+// UI-only: cart count is static for now. Wire up to the storefront cart
+// cookie + carts table (see the framework default layout) once the
+// commerce backend is migrated.
+const cartCount = 0
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@yield('title', 'Stamped — New York')</title>
+  <meta name="description" content="@yield('description', 'Stamped — vintage-inspired New York apparel. Heavyweight I ❤ New York tees, hoodies and crewnecks, made in small batches.')">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f7f1e3;
+      --cream-soft: #efe7d4;
+      --ink: #1c1917;
+    }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .font-display { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--ink); color: var(--cream); }
+    /* keep the cream theme even before utility CSS resolves */
+    .bg-cream { background: var(--cream); }
+    .bg-cream-soft { background: var(--cream-soft); }
+    .text-ink { color: var(--ink); }
+  </style>
+  {{-- Constrain the SPA router to swap only <main> so the header/footer/
+      announcement survive client-side navigation. --}}
+  <script>window.STX_ROUTER_OPTIONS = { container: 'main' };</script>
+</head>
+<body class="bg-cream text-ink antialiased">
+
+  <StampedAnnounce />
+
+  <StampedHeader :cartCount="cartCount" />
+
+  <main>
+    @yield('content')
+  </main>
+
+  <StampedFooter />
+
+  @stack('scripts')
+</body>
+</html>

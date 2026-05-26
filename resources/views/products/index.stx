@@ -1,0 +1,87 @@
+@extends('layouts/storefront')
+
+@section('title', 'Shop all — Stamped')
+@section('description', 'Shop all Stamped apparel — heavyweight I ❤ New York tees, hoodies and crewnecks.')
+
+<script server>
+const path = require('path')
+const { getProducts, priceLabel } = require(path.resolve(process.cwd(), 'resources/functions/catalog.ts'))
+
+const all = getProducts()
+const tiles = all.map(p => ({
+  slug: p.slug,
+  name: p.name,
+  color: p.color,
+  category: p.category,
+  priceLabel: priceLabel(p.price),
+  compareAtLabel: p.compareAt ? priceLabel(p.compareAt) : '',
+  image: p.images[0],
+  hoverImage: p.images[1] || '',
+  badge: p.badge || '',
+}))
+
+const categories = ['All', ...Array.from(new Set(all.map(p => p.category)))]
+const count = all.length
+</script>
+
+@section('content')
+  <div class="mx-auto max-w-7xl px-6 py-12 md:py-16">
+
+    <!-- Page header -->
+    <header class="text-center">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">The collection</p>
+      <h1 class="mt-3 font-display text-5xl text-stone-900 md:text-6xl">Shop all</h1>
+      <p class="mt-3 text-stone-600">{{ count }} pieces · designed and printed in New York</p>
+    </header>
+
+    <!-- Filter bar (client-side) -->
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-2" data-stx-filter>
+      @foreach (categories as cat)
+        <button
+          type="button"
+          data-filter="{{ cat }}"
+          class="rounded-full border border-stone-900/15 px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-600 transition-colors hover:border-stone-900 hover:text-stone-900 data-[active=true]:border-stone-900 data-[active=true]:bg-stone-900 data-[active=true]:text-[#f7f1e3]"
+          {{ cat === 'All' ? 'data-active=true' : '' }}
+        >{{ cat }}</button>
+      @endforeach
+    </div>
+
+    <!-- Grid -->
+    <div class="mt-12 grid grid-cols-2 gap-x-5 gap-y-12 lg:grid-cols-3" data-stx-grid>
+      @foreach (tiles as t)
+        <div data-category="{{ t.category }}">
+          <ProductTile
+            slug="{{ t.slug }}"
+            name="{{ t.name }}"
+            color="{{ t.color }}"
+            priceLabel="{{ t.priceLabel }}"
+            compareAtLabel="{{ t.compareAtLabel }}"
+            image="{{ t.image }}"
+            hoverImage="{{ t.hoverImage }}"
+            badge="{{ t.badge }}"
+          />
+        </div>
+      @endforeach
+    </div>
+  </div>
+
+  <script data-stx-scoped>
+  ;(() => {
+    if (window.__stampedFilterWired) return
+    window.__stampedFilterWired = true
+    document.addEventListener('click', (e) => {
+      const btn = e.target instanceof Element ? e.target.closest('[data-filter]') : null
+      if (!btn) return
+      const bar = btn.closest('[data-stx-filter]')
+      const grid = bar && bar.parentElement.querySelector('[data-stx-grid]')
+      if (!grid) return
+      const cat = btn.getAttribute('data-filter')
+      bar.querySelectorAll('[data-filter]').forEach(b => b.setAttribute('data-active', String(b === btn)))
+      grid.querySelectorAll('[data-category]').forEach((el) => {
+        const show = cat === 'All' || el.getAttribute('data-category') === cat
+        el.style.display = show ? '' : 'none'
+      })
+    })
+  })()
+  </script>
+@endsection

@@ -1,0 +1,63 @@
+@extends('layouts/storefront')
+
+@section('title', 'Collection — Stamped')
+
+<script server>
+const path = require('path')
+const { getProducts, priceLabel } = require(path.resolve(process.cwd(), 'resources/functions/catalog.ts'))
+const all = getProducts()
+
+const requested = (typeof handle !== 'undefined' && handle) ? String(handle).toLowerCase() : ''
+const match = all.find(p => p.category.toLowerCase() === requested)
+const title = match ? match.category : (requested ? requested.charAt(0).toUpperCase() + requested.slice(1) : 'All')
+
+const tiles = all
+  .filter(p => !match || p.category.toLowerCase() === requested)
+  .map(p => ({
+    slug: p.slug,
+    name: p.name,
+    color: p.color,
+    priceLabel: priceLabel(p.price),
+    compareAtLabel: p.compareAt ? priceLabel(p.compareAt) : '',
+    image: p.images[0],
+    hoverImage: p.images[1] || '',
+    badge: p.badge || '',
+  }))
+</script>
+
+@section('content')
+  <div class="mx-auto max-w-7xl px-6 py-12 md:py-16">
+    <nav class="mb-8 text-xs uppercase tracking-[0.14em] text-stone-500">
+      <a href="/collections" data-stx-link class="hover:text-stone-900">Collections</a>
+      <span class="px-2">/</span>
+      <span class="text-stone-700">{{ title }}</span>
+    </nav>
+
+    <header class="text-center">
+      <h1 class="font-display text-5xl text-stone-900 md:text-6xl">{{ title }}</h1>
+      <p class="mt-3 text-stone-600">{{ tiles.length }} piece{{ tiles.length === 1 ? '' : 's' }}</p>
+    </header>
+
+    @if (tiles.length === 0)
+      <div class="mt-12 rounded-sm border border-dashed border-stone-900/20 bg-[#efe7d4] p-16 text-center">
+        <p class="text-stone-600">Nothing here yet — check back soon.</p>
+        <a href="/products" data-stx-link class="mt-6 inline-flex bg-stone-900 px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] hover:bg-stone-700">Shop all</a>
+      </div>
+    @else
+      <div class="mt-12 grid grid-cols-2 gap-x-5 gap-y-12 lg:grid-cols-3">
+        @foreach (tiles as t)
+          <ProductTile
+            slug="{{ t.slug }}"
+            name="{{ t.name }}"
+            color="{{ t.color }}"
+            priceLabel="{{ t.priceLabel }}"
+            compareAtLabel="{{ t.compareAtLabel }}"
+            image="{{ t.image }}"
+            hoverImage="{{ t.hoverImage }}"
+            badge="{{ t.badge }}"
+          />
+        @endforeach
+      </div>
+    @endif
+  </div>
+@endsection

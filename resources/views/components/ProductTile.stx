@@ -1,0 +1,65 @@
+<script>
+interface ProductTileProps {
+  slug: string
+  name: string
+  color?: string
+  /** Pre-formatted, e.g. "$42.00" — format at the call site (STX SSR
+   *  doesn't expose defineProps numerics to the template). */
+  priceLabel: string
+  compareAtLabel?: string
+  image: string
+  hoverImage?: string
+  badge?: string
+}
+
+const {
+  slug,
+  name,
+  color = '',
+  priceLabel,
+  compareAtLabel = '',
+  image,
+  hoverImage = '',
+  badge = '',
+} = defineProps<ProductTileProps>()
+</script>
+
+<a href="/products/{{ slug }}" data-stx-link class="group block">
+  <div class="relative overflow-hidden rounded-sm bg-[#efe7d4] aspect-[4/5]">
+    <img
+      src="{{ image }}"
+      alt="{{ name }} — {{ color }}"
+      width="600"
+      height="750"
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 {{ hoverImage ? 'group-hover:opacity-0' : 'group-hover:scale-[1.03]' }}"
+    >
+    @if (hoverImage)
+      <img
+        src="{{ hoverImage }}"
+        alt=""
+        width="600"
+        height="750"
+        loading="lazy"
+        decoding="async"
+        class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      >
+    @endif
+    @if (badge)
+      <span class="absolute left-3 top-3 rounded-full bg-[#f7f1e3]/95 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-900">{{ badge }}</span>
+    @endif
+  </div>
+  <div class="mt-4 text-center">
+    <h3 class="font-display text-lg leading-snug text-stone-900">{{ name }}</h3>
+    @if (color)
+      <p class="mt-0.5 text-xs uppercase tracking-[0.12em] text-stone-500">{{ color }}</p>
+    @endif
+    <div class="mt-1.5 flex items-center justify-center gap-2 text-sm">
+      <span class="font-medium text-stone-900">{{ priceLabel }}</span>
+      @if (compareAtLabel)
+        <span class="text-stone-400 line-through">{{ compareAtLabel }}</span>
+      @endif
+    </div>
+  </div>
+</a>

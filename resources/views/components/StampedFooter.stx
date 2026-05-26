@@ -1,0 +1,91 @@
+<script>
+interface FooterColumn {
+  title: string
+  links: { href: string, label: string }[]
+}
+
+interface FooterProps {
+  columns?: FooterColumn[]
+  year?: number
+}
+
+const {
+  columns = [
+    {
+      title: 'Shop',
+      links: [
+        { href: '/products', label: 'All products' },
+        { href: '/collections/tees', label: 'Tees' },
+        { href: '/collections/hoodies', label: 'Hoodies' },
+        { href: '/lookbook', label: 'Lookbook' },
+      ],
+    },
+    {
+      title: 'Help',
+      links: [
+        { href: '/contact', label: 'Contact' },
+        { href: '/faq', label: 'FAQ' },
+        { href: '/policies/shipping', label: 'Shipping' },
+        { href: '/policies/returns', label: 'Returns' },
+      ],
+    },
+    {
+      title: 'Company',
+      links: [
+        { href: '/about', label: 'Our story' },
+        { href: '/policies/terms', label: 'Terms' },
+        { href: '/policies/privacy', label: 'Privacy' },
+      ],
+    },
+  ],
+  year = new Date().getFullYear(),
+} = defineProps<FooterProps>()
+</script>
+
+<footer class="mt-24 border-t border-stone-900/10 bg-[#efe7d4]">
+  <div class="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+
+    <!-- Brand + newsletter -->
+    <div class="max-w-sm">
+      <img src="/assets/images/stamped/stamped-logo.png" alt="Stamped" width="150" height="56" class="h-12 w-auto" decoding="async">
+      <p class="mt-4 text-sm leading-relaxed text-stone-600">
+        Heavyweight, vintage-inspired New York apparel — designed and printed in small batches in the city it's named for.
+      </p>
+      <form action="/api/newsletter/subscribe" method="POST" class="mt-6 flex max-w-xs items-center border-b border-stone-900/30 focus-within:border-stone-900 transition-colors">
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="Email address"
+          autocomplete="email"
+          class="w-full bg-transparent py-2 text-sm text-stone-900 placeholder:text-stone-500 focus:outline-none"
+        >
+        <button type="submit" class="shrink-0 pl-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 hover:text-stone-900" aria-label="Subscribe">Join</button>
+      </form>
+    </div>
+
+    @foreach (columns as col)
+      <div>
+        <p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-900">{{ col.title }}</p>
+        <ul class="space-y-3 text-sm text-stone-600">
+          @foreach (col.links as link)
+            <li><a href="{{ link.href }}" data-stx-link class="transition-colors hover:text-stone-900">{{ link.label }}</a></li>
+          @endforeach
+        </ul>
+      </div>
+    @endforeach
+  </div>
+
+  <div class="border-t border-stone-900/10">
+    <div class="mx-auto flex max-w-7xl flex-col-reverse items-center justify-between gap-3 px-6 py-6 text-xs text-stone-500 md:flex-row">
+      <p>© {{ year }} Stamped. All rights reserved.</p>
+      <div class="flex items-center gap-5">
+        <a href="/policies/terms" data-stx-link class="hover:text-stone-900">Terms &amp; Policies</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:text-stone-900" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

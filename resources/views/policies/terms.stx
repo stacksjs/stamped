@@ -1,0 +1,34 @@
+@extends('layouts/storefront')
+
+@section('title', 'Terms & Policies — Stamped')
+
+@section('content')
+  <article class="mx-auto max-w-2xl px-6 py-16">
+    <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500">Policies</p>
+    <h1 class="mt-3 font-display text-5xl text-stone-900">Terms &amp; conditions</h1>
+    <p class="mt-4 text-sm text-stone-500">Sample policy copy for this demo storefront.</p>
+
+    <div class="mt-10 space-y-8 leading-relaxed text-stone-600">
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">Overview</h2>
+        <p class="mt-2">By using this site and placing an order, you agree to these terms. We may update them from time to time; the version posted here is the one that applies to your order.</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">Orders &amp; pricing</h2>
+        <p class="mt-2">All prices are listed in U.S. dollars. We reserve the right to correct pricing errors and to limit quantities. An order is confirmed once you receive a confirmation email.</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">Products</h2>
+        <p class="mt-2">Because our pieces are garment-dyed and printed in small batches, slight variation between items is normal and part of the character — it is not a defect.</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">Intellectual property</h2>
+        <p class="mt-2">All artwork, designs, and content on this site belong to Stamped and may not be reproduced without permission.</p>
+      </section>
+      <section>
+        <h2 class="font-display text-2xl text-stone-900">Contact</h2>
+        <p class="mt-2">Questions about these terms? Reach us through <a href="/contact" data-stx-link class="underline underline-offset-2 hover:text-stone-900">our contact page</a>.</p>
+      </section>
+    </div>
+  </article>
+@endsection

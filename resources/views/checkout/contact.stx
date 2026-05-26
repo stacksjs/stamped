@@ -1,0 +1,57 @@
+@extends('layouts/storefront')
+
+@section('title', 'Checkout — Contact')
+
+<script server>
+const path = require('path')
+const { getProducts, priceLabel } = require(path.resolve(process.cwd(), 'resources/functions/catalog.ts'))
+const all = getProducts()
+const sample = [{ slug: 'ny-tee', qty: 1 }, { slug: 'ny-hoodie', qty: 1 }]
+const items = sample.map((s) => {
+  const p = all.find(x => x.slug === s.slug)
+  const lineTotal = p.price * s.qty
+  return { name: `${p.name} — ${p.color}`, qty: s.qty, lineTotal, lineTotalLabel: priceLabel(lineTotal) }
+})
+const subtotal = items.reduce((s, i) => s + i.lineTotal, 0)
+const shipping = subtotal >= 75 ? 0 : 6
+const total = subtotal + shipping
+const subtotalLabel = priceLabel(subtotal)
+const shippingLabel = shipping === 0 ? 'Free' : priceLabel(shipping)
+const totalLabel = priceLabel(total)
+</script>
+
+@section('content')
+  <div class="mx-auto max-w-5xl px-6 py-12 md:py-16">
+    <CheckoutSteps current="contact" />
+
+    <div class="grid items-start gap-10 md:grid-cols-[1fr_360px]">
+      <div>
+        <h1 class="font-display text-4xl text-stone-900">Contact</h1>
+        <p class="mt-2 text-stone-600">We'll send your receipt and tracking here.</p>
+
+        <form action="/checkout/shipping" method="get" class="mt-8 space-y-5">
+          <div>
+            <label class="text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-500">Email</label>
+            <input type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="mt-1.5 w-full border border-stone-900/20 bg-transparent px-4 py-3 text-sm focus:border-stone-900 focus:outline-none">
+          </div>
+          <label class="flex items-center gap-2.5 text-sm text-stone-600">
+            <input type="checkbox" name="news" class="h-4 w-4 rounded border-stone-400 text-stone-900 focus:ring-stone-900">
+            Email me with news and offers
+          </label>
+          <div class="flex items-center justify-between gap-4 pt-2">
+            <a href="/cart" data-stx-link class="text-sm text-stone-500 hover:text-stone-900">← Back to bag</a>
+            <button type="submit" class="bg-stone-900 px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f7f1e3] transition-colors hover:bg-stone-700">Continue to shipping</button>
+          </div>
+        </form>
+      </div>
+
+      <OrderSummary
+        :items="items"
+        subtotalLabel="{{ subtotalLabel }}"
+        shippingLabel="{{ shippingLabel }}"
+        totalLabel="{{ totalLabel }}"
+        :showItems="true"
+      />
+    </div>
+  </div>
+@endsection
