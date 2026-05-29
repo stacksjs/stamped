@@ -39,6 +39,7 @@ const skipAppKeyCheck = [
   'create',
   'migrate',
   'seed',
+  'serve',
   'generate',
   'make',
   'key:generate',
