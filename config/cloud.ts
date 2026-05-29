@@ -28,6 +28,27 @@ export const tsCloud: TsCloudConfig = {
   },
 
   /**
+   * Cloud provider selection.
+   *
+   * 'hetzner' provisions a Hetzner Cloud server (cheap VPS) and deploys the app
+   * over SSH via ts-cloud's Hetzner driver. Falls back to 'aws' (CloudFormation)
+   * when unset.
+   */
+  cloud: {
+    provider: (process.env.CLOUD_PROVIDER as 'aws' | 'hetzner') || 'hetzner',
+  },
+
+  /**
+   * Hetzner Cloud configuration (used when cloud.provider === 'hetzner').
+   * The API token falls back to the HCLOUD_TOKEN / HETZNER_API_TOKEN env vars.
+   */
+  hetzner: {
+    apiToken: process.env.HCLOUD_TOKEN,
+    location: process.env.HCLOUD_LOCATION || 'fsn1',
+    image: 'ubuntu-24.04',
+  },
+
+  /**
    * Deployment Mode
    *
    * - 'server': Traditional EC2-based deployment (Forge-style)
@@ -112,7 +133,13 @@ export const tsCloud: TsCloudConfig = {
      */
     compute: {
       instances: 1,
-      size: 'small', // Provider-agnostic: 'nano', 'micro', 'small', 'medium', 'large', 'xlarge', '2xlarge' (small = 2GB RAM, needed for bun install)
+      // Hetzner's old shared-Intel `cx` line (cx22/cx32/…) is deprecated; the
+      // current cheap line is cx23 (2 vCPU / 4GB, ~€4/mo) in fsn1. Passing the
+      // concrete Hetzner type bypasses ts-cloud's size→type shorthand. On AWS
+      // this would be a t-family size; swap back to 'small' there.
+      size: 'cx23',
+      runtime: 'bun',
+      allowSsh: true, // Hetzner deploys happen over SSH
       disk: {
         size: 20,
         type: 'ssd', // Provider-agnostic: 'standard', 'ssd', 'premium'
@@ -539,9 +566,43 @@ export const tsCloud: TsCloudConfig = {
    */
   sites: {
     main: {
-      root: '/var/www/app',
+      // Local project directory packaged and shipped to the server. The Hetzner
+      // deploy runs `buddy serve` (the production STX server + coming-soon gate)
+      // directly with Bun. We invoke the CLI entry rather than the `./buddy`
+      // shell wrapper because the wrapper bootstraps pantry, which isn't what a
+      // long-lived systemd service wants.
+      root: '.',
       path: '/',
-      domain: env.APP_DOMAIN || 'stacksjs.com',
+      port: 3000,
+      start: 'bun storage/framework/core/buddy/src/cli.ts serve',
+      // Runtime environment written to the server's `.env` by ts-cloud. The
+      // deploy script overwrites `.env` from these entries, so every value the
+      // production server needs to boot (and stay behind the coming-soon page)
+      // must live here. Secrets are read from the local env at deploy time
+      // rather than hardcoded.
+      env: {
+        APP_ENV: 'production',
+        NODE_ENV: 'production',
+        APP_NAME: env.APP_NAME || 'Stamped',
+        APP_KEY: env.APP_KEY || '',
+        APP_URL: env.APP_URL || '',
+        // Hold every visitor behind the coming-soon holding page. Visitors who
+        // know the secret can bypass via `?secret=…` / the magic-link cookie.
+        APP_COMING_SOON: 'true',
+        APP_COMING_SOON_SECRET: env.APP_COMING_SOON_SECRET || 'stamped-preview',
+        APP_MAINTENANCE: 'false',
+        PORT: '3000',
+      },
+      // Dependencies are installed ON THE SERVER from the shipped lockfile
+      // rather than packed into the release tarball — this keeps the upload
+      // tiny (source only, no node_modules/pantry). bun reproduces the exact
+      // dependency tree from bun.lock (incl. the `@stacksjs/*` workspace
+      // symlinks) in seconds. Requires `@stacksjs/ts-cloud` >= 0.2.21, which is
+      // the first release that runs `preStart` on the server during deploy.
+      preStart: [
+        'bun install --frozen-lockfile',
+      ],
+      // No domain: served directly on the server's public IP (http://IP:3000).
     },
   },
 }

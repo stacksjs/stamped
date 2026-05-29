@@ -54,6 +54,9 @@ custom-cli
 *bun-build
 discovered-packages.json
 
+# ts-cloud deploy cache + state (local only)
+.ts-cloud/
+
 # Stub workspace packages (temporary)
 /ts-auth
 /ts-cloud
