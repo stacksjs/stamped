@@ -68,19 +68,19 @@
     "sqlite": "^3.47.2"
   },
   "dependencies": {
-    "@stacksjs/stx": "^0.2.69",
+    "@stacksjs/stx": "^0.2.777",
     "@types/d3": "^7.4.3",
-    "bun-plugin-stx": "^0.2.69",
-    "bun-query-builder": "^0.1.21",
-    "craft-native": "^0.0.37",
+    "bun-plugin-stx": "^0.2.777",
+    "bun-query-builder": "^0.3.33",
+    "craft-native": "^0.0.411",
     "d3": "^7.9.0",
     "stacks": "workspace:*",
-    "stx-router": "^0.2.69"
+    "stx-router": "^0.2.777"
   },
   "devDependencies": {
-    "@stacksjs/dtsx": "^0.9.23",
-    "better-dx": "^0.2.15",
-    "bun-plugin-dtsx": "^0.9.23"
+    "@stacksjs/dtsx": "^0.11.23",
+    "better-dx": "^0.2.38",
+    "bun-plugin-dtsx": "^0.11.23"
   },
   "workspaces": [
     "storage/framework",
